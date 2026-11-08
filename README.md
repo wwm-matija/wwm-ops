@@ -15,9 +15,9 @@ pipeline i kanon su u `vino_world`, API u `wwm_api`, worker u `wwm_worker` (isti
 | `AGENTS.md` | pravila i način rada; Codex ga čita sam. `CLAUDE.md` i `GEMINI.md` samo pokazuju na njega |
 | `upute/` | jedna datoteka po poslu, korak po korak (`mailovi.md`, kasnije `pr_objave.md`, `popravci.md` …) |
 | `predlosci/` | tekstovi mailova po vrsti i jeziku, Matijine riječi |
-| `alati/` | skripte koje upute pozivaju; svaka ima opis na vrhu |
+| `alati/` | skripte koje upute pozivaju; svaka ima opis na vrhu: `sken.py` (čita poštu na poslužitelju), `posalji.py` (šalje s poslužitelja, ledger), `pregled.py` (HTML pregled s filtrima), `kanon_kratki.py`, `kanon_red.py` |
 | `odluke/` | `YYYY-MM-DD-tema.md` s ODLUČI na vrhu; Matija upiše odluku ispod |
-| `out/POSLANO.csv` | ledger svakog poslanog maila (datum, kome, sandučić, predložak, tko odobrio) |
+| `out/POSLANO.csv` | ledger svakog poslanog maila (datum, kome, sandučić, predložak, tko odobrio); ostatak `out/` (skenovi, planovi, `PREGLED.html`) je lokalan i ne ide u git |
 | `KANON_KRATKI.md` | sažetak zadnjih redaka kanona `SUSTAV_RADA.md`; obnavlja ga `alati/kanon_kratki.py` |
 
 ## Kako početi (čovjek ili agent)
