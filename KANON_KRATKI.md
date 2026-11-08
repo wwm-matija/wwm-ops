@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 317, najnoviji t.402). Napravio `alati/kanon_kratki.py` 08.11.2026. 13:18 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 318, najnoviji t.403). Napravio `alati/kanon_kratki.py` 08.11.2026. 15:30 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.403 · 8.11.2026. · bez objave
+
+**MAILOVI 8.11.: prvi redovni pregled, 4 poruke za čitanje, 0 zahtjeva za micanje**
+
+(8.11.2026.; vlasnik: »mailovi«)
+
+Biljezi: `MAILOVI-SKEN-2026-11-08`
+
+Pouke: Za izričit početak u UTC-u postaviti TZ=UTC. Prvi prolaz počeo je u 05:48 UTC zbog lokalnog vremena poslužitelja, dopunski sken našao je još 6 strojnih poruka. Riječ delete u upitu Fox Run odnosila se na odabir Worda.
+
+Otvoreno: Fox Run Vineyards, San Leonardo, Kalyan Kumar i Dutchbloggeronthemove čekaju Matijinu riječ za daljnju provjeru.
 
 ## t.402 · 5.11.2026. · bez objave (API i nginx uzivo 10:19 UTC)
 
@@ -281,14 +293,4 @@ Otvoreno: demo nije na karti (treba li pin, vlasnik); prijevodi novih kljuceva; 
 Biljezi: `WA-V22-HU-2026-10-16`
 
 Otvoreno: 13 obrisa vinara u privremenom sloju (Zang i noviji) cekaju iduce pecenje; VINGIS vektor samo ako vlasnik sam odluci traziti; token s rokom 28.10.; odgovor Agnes (nacrt EN) ceka rijec vlasnika
-
-## t.373 · 16.10.2026. · bez statusa
-
-**TLO SAMO PRAVO: SOILGRID REDAK NA KARTICI PARCELE SAMO GDJE NEMA NACIONALNOG TLA; OBJAVA #79, karta v10066, SHV `202610160605`**
-
-(16.10.2026.; nalog vlasnika 15.10.: »soil ovaj moramo izbacit di god ima pravi, sad pise uvijek duplo, dolje opet ovaj losi bude«)
-
-Biljezi: `VY-SOIL-2026-10-16`
-
-Otvoreno: isto kao t.372 (prijevodi 22 kljuca, mapiranje sorti interno, Portugal postaje, Midalidare). **Dopuna 16.10.2026. (objava #80, karta v10067, SHV `202610160658`):** presuda vlasnika »all wines, ne other«: sekcija kartice, naslov na naslovnici reporta, polje u kartici Wines i kljucevi rjecnika (`All wines`, `Featured wines and the full list`) preimenovani; `popup_render.js?v=20261016b`, `JEZICI_V 34-20261016`; `provjeri_jezike` 11/11. <!-- VZ-ALL-WINES-2026-10-16 -->
 
