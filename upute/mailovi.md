@@ -31,6 +31,9 @@ Izlazni JSON je na poslužitelju (`~/wwm_ops_podaci/sken_<host>_<vrijeme>.json`)
 (mid, references), skini ga: `scp namecheap-portal:~/wwm_ops_podaci/sken_premium215_<vrijeme>.json out/`.
 
 Ako ssh vrati 255 (Namecheap zna odbiti brze uzastopne veze), pričekaj 20 s i ponovi. Ništa drugo ne mijenjaj.
+`--od` je uvijek UTC, bez obzira na lokalnu zonu poslužitelja. Na poslužitelje ne stavljaš nove skripte ni datoteke
+osim ova dva alata; ako ti sken ne daje što trebaš, to je rupa u alatu i ide u `odluke/`, ne zaobilazi se vlastitim skriptama.
+Čitanje pojedine poruke iz Maildira radi provjere je dopušteno (samo čitanje).
 
 ## Korak 2: javi Matiji, odmah i bez istrage
 

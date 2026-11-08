@@ -101,18 +101,20 @@ def ucitaj_iskljucene(putanja):
     return s
 
 def od_kada(arg):
+    """--od je uvijek UTC (poslužitelji imaju razne lokalne zone; 8.11. je 00:48 postalo 05:48 UTC)."""
     if not arg:
         return None
     m = re.match(r"^(\d+)\s*h$", arg.strip())
     if m:
         return time.time() - int(m.group(1)) * 3600
+    import calendar
     try:
-        return time.mktime(time.strptime(arg.strip()[:16], "%Y-%m-%dT%H:%M"))
+        return calendar.timegm(time.strptime(arg.strip()[:16], "%Y-%m-%dT%H:%M"))
     except ValueError:
         try:
-            return time.mktime(time.strptime(arg.strip()[:10], "%Y-%m-%d"))
+            return calendar.timegm(time.strptime(arg.strip()[:10], "%Y-%m-%d"))
         except ValueError:
-            sys.exit("STOP: --od ne razumijem: %r (očekujem 2026-11-06T00:00, 2026-11-06 ili 48h)" % arg)
+            sys.exit("STOP: --od ne razumijem: %r (očekujem 2026-11-06T00:00 UTC, 2026-11-06 ili 48h)" % arg)
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
