@@ -1,6 +1,6 @@
 # Mailovi: pilot s Codexom, otvorena pitanja prije prvog pravog pokretanja
 
-Status: ODLUČI
+Status: ODLUČENO (Matija, 8.11.2026.)
 
 ## ODLUČI
 
@@ -27,5 +27,10 @@ Status: ODLUČI
 - Kod pogrešno isključene domene propuštamo odgovore; kod pogrešno uključene klijentski mail ulazi u WWM izvještaj (AGENTS.md §3.9).
 - Stari popis viđenih (82 adrese na laptopu) se ne prenosi; novi popis je po poruci (sandučić + Message-ID) na poslužitelju.
 
-## Odluka
-(Matija piše ovdje)
+## Odluka (Matija, 8.11.2026., u razgovoru)
+1. Domene: od šest nesigurnih nijedna nije naša osim cityranking.space i cityranking.website (naše); narodni-reporteri.info je klijent. Upisano u `alati/sken_iskljuci.txt` (17 isključenih).
+2. matija@mg-solutions.digital: skenirati i njega.
+3. Prvi pravi sken od 6.11. 00:48 UTC (`--od 2026-11-06T00:48`).
+4. Slanje smiju pokretati Codex i Antigravity odmah, oba od prvog dana; svaki mail i dalje samo uz Matijinu riječ.
+5. Pregled: HTML u repou (`alati/pregled.py` -> `out/PREGLED.html`).
+Dodatno: Codex još nije instaliran na novom laptopu; instalacija je Matijin korak prije pilota.
