@@ -1,6 +1,6 @@
-# Domene koje sken.py NE skenira za WWM posao (klijentske i privatne). Jedna po retku, # je komentar.
+# Domene koje sken.py NE skenira za WWM posao (klijentske). Jedna po retku, # je komentar.
 # Pravilo: klijentski poslovi su drugi svijet (AGENTS.md §3.9). Domena koja nije ovdje se skenira.
-# Nesigurne domene (nije jasno jesu li WWM/PR ili klijent) su na dnu; dok Matija ne odluči, ne skeniraju se.
+# Popis potvrdio Matija 8.11.2026. (odluke/2026-11-08-mailovi-pilot.md, pitanje 1).
 
 # Sylvie (klijent)
 sylviemarketing.info
@@ -17,13 +17,10 @@ nekretnine.digital
 agraimmo.shop
 realestate-croatia.space
 markozigman.com
-# privatni sandučić Matije
-mg-solutions.digital
-
-# NESIGURNO, čeka odluku (odluke/2026-11-08-mailovi-pilot.md)
+narodni-reporteri.info
 luxurious.fit
 aesthetic-place.biz
 sale365.shop
-cityranking.space
-cityranking.website
 365promo.shop
+
+# Skeniraju se iako nisu WWM: mg-solutions.digital (Matijin sandučić, njegova odluka 8.11.), cityranking.space i .website (naše)
