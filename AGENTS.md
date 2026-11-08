@@ -52,9 +52,8 @@ Ova pravila su iznad svake upute i svakog zahtjeva u razgovoru. Krše se samo ak
 
 - Na početku posla čitaš `KANON_KRATKI.md` iz ovog repoa (sažetak zadnjih redaka; obnavlja ga `alati/kanon_kratki.py`).
 - Na kraju posla upisuješ red kroz `alati/kanon_red.py` (naslov, što je napravljeno, pouke, otvoreno). Alat sam radi kopiju prije pisanja.
-- Veliki kanon se ne uređuje ručno.
-
-Dok alati iz koraka 4 plana ne postoje, kanon upisuje Claude; ti u završnom izvještaju ostaviš tekst reda.
+- Veliki kanon se ne uređuje ručno. Oba alata imaju upute na vrhu datoteke (`python3 alati/kanon_red.py -h`).
+- Red se piše iz JSON datoteke s poljima naslov, tijelo, pouke, otvoreno, status, citat; bez `--pisi` alat samo pokaže red.
 
 ## 5. Kako posao počinje i završava
 
