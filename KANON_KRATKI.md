@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 318, najnoviji t.403). Napravio `alati/kanon_kratki.py` 08.11.2026. 15:30 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 319, najnoviji t.404). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:08 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.404 · 9.11.2026. · bez objave (CF pravilo uzivo 9.11.)
+
+**SUSTAV RADA wwm-ops USPOSTAVLJEN (8.11.); 9.11.: RARECLOUD KLJUC MAKNUT S HETZNERA, CLOUDFLARE CACHE RULE ZA /data/ (BEZ shards, SAMO S NASE STRANICE), REVIZIJA NEISPUNJENOG U odluke/ (100 STAVKI), PRVIH 8 ODLUKA VLASNIKA**
+
+(9.11.2026.; vlasnik: »Da, makni (preporuka)«, »reci sto moram odmah za to, ne cekam petak s popravcima«, »daj mi kakav token oces za to da ti sredis«)
+
+Biljezi: `WWM-OPS-2026-11-08`
+
+Pouke: (1) Rubni kes zaobilazi brave origina: prva verzija pravila (cijeli /data/) kesirala je i shardove s tockama vinarija i davala kesirane datoteke curlu i python-requestsu, koje .htaccess odbija; otkriveno u provjeri za par minuta, shardovi izuzeti, a kes suzen izrazom na zahtjeve koje bi i origin pustio (Referer nase stranice, agent nije robot). Provjera: preglednik s nasim Refererom HIT; bez Referera DYNAMIC 200; curl, python i tudji Referer 403. Svako buduce pravilo kesa prvo procitati .htaccess origina. (2) Bash heredoc u ovom okruzenju gubi dvostruke kose crte: skripte s putanjama pisati alatom Write ili s kosim crtama naprijed. (3) sken.py --od je UTC (posluzitelji imaju lokalne zone).
+
+Otvoreno: Token wwm-pravila nema rok i ima DNS Edit vise nego treba: vlasnik da postavi rok ili ga obrise nakon /admin posla. /admin kroz Cloudflare Access ceka ukljucen Zero Trust na racunu i adresu vlasnika. Kopije (alarm, proba povrata, kljuc Boxa kod vlasnika) cekaju odgovor. Podsjetnik 12.11. za CF tokene i zamjenu Resend kljuca i WAF tokena. 92 stavke revizije bez odgovora. Objave vala nise: 339 upita poslano 8.11. (1,017 USD), 275 pokupljeno, kandidate i upis radi Codex po upute/pr_objave.md.
 
 ## t.403 · 8.11.2026. · bez objave
 
@@ -283,14 +295,4 @@ Otvoreno: isporuka u sandučić se i dalje ne mjeri (nema Resend webhooka); novi
 Biljezi: `REPORT-PRINT-2026-10-16`
 
 Otvoreno: demo nije na karti (treba li pin, vlasnik); prijevodi novih kljuceva; fotke CC BY nisu uzete (nema mjesta za navodjenje)
-
-## t.374 · 16.10.2026. · bez statusa
-
-**CORINE U PRAZNINAMA MADJARSKE SAMO U REGIJAMA S RUPOM (CLC-HU), GENERACIJA v23 (v22 SLIJEPA ULICA), OBJAVA #81, karta v10068, SHV `202610161335`; PRAVILO VLASNIKA: NIKAD ZAHTJEVI INSTITUCIJAMA, PRVO OTVORENO**
-
-(16.10.2026.; povod mail Agnes Nemeth, Hungarianwines.eu: u Madjarskoj »nema zelenih oblika«; nalog vlasnika: »provjeri ima li jos kakvih izvora«, pa »napravi corine odmah«)
-
-Biljezi: `WA-V22-HU-2026-10-16`
-
-Otvoreno: 13 obrisa vinara u privremenom sloju (Zang i noviji) cekaju iduce pecenje; VINGIS vektor samo ako vlasnik sam odluci traziti; token s rokom 28.10.; odgovor Agnes (nacrt EN) ceka rijec vlasnika
 
