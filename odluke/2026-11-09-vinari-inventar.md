@@ -76,6 +76,19 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - Prije slanja: probni mailovi 9 od 9 u INBOX (desk@worldwinerymap.org), provjere pošiljatelja prolaze, linkovi rade. S Mailjet lista maknute ukupno 22 adrese: 14 (profil, naša lista, već dobili mail) i 8 pod krivim imenom vinarije (nađeno usporedbom s `MAIL_VAN.csv`). Usporedba s 25 starih izvora sa starog laptopa: drugih poklapanja nema.
 - U tekstovima ostaje »90 zemalja« (Matija: »ne mijenjaj zemlje, trajat će predugo«).
 
+## GR, CY, BR: izravni link na profil (nacrti složeni 9.11., NIJE upaljeno)
+
+Matija 9.11.: »sredi snov za ove br gr«, tekst odobren (»Da, složi nacrte«). Paljenje tek na njegovo »šalji«.
+
+- Popis iz prolaza webova: 529 adresa (web radi, na njemu ime vinarije ili naš mail). Snov provjera: 370 zelenih (GR 187, BR 162, CY 21), 43 ne valja, 104 nepoznato, 12 neprovjereno. Potrošeno 169 kredita.
+- Link u mailu: `https://worldwinerymap.com/?w=<wwm_id>` (otvara kartu na vinariji s gumbom »This is my winery«), u polju `body1` kao doslovan URL.
+- Tekst: listopadski K1 tekst, dva odlomka o članku zamijenjena jednim s linkom; predmet isti kao u listopadu.
+- **Nacrt 3229376** »B2B K1Z EL izravni link antilalos.eu 0911«: 208 adresa (GR 187, CY 21), lista 41924377, 3 sandučića antilalos.eu (Elena Vlachou), limit 25 po sandučiću.
+- **Nacrt 3229385** »B2B K1Z BR izravni link altofalantemedia.lat 0911«: 162 adrese, lista 41924399, 3 sandučića **worldwinerymap.org** (Matija; ime kampanje nosi krivu domenu). Ti sandučići su do kraja kampanje 3214819 (ZA, 13 adresa) u aktivnoj kampanji: paliti tek kad ona završi.
+- Proba: grčki tekst na 3 naše adrese (prvoiceglobal.com), 3 od 3 u INBOX, link ispravno upisan. Snov je slao jedan mail na oko 28 minuta po sandučiću.
+- Alat i stanje: `C:/Users/world/Documents/WWM_REVIZIJA_2026-10-17/DANAS_1710/skripte_I/faza_grbrcy_0911.py`, `stanje_grbrcy_0911.json`, `verifikacija_grbrcy_rezultat_0911.json`; ledger `B2B_LEDGER_1710.jsonl`.
+- Mjera učinka: registracije prema zelenima s člankom (K1Z: 275 na 11.720).
+
 ## Izvršeno 9.11. poslije odluka
 
 - **Mailjet runda 2:** maknuto 14 adresa s lista (28 redaka u popisu bilo je 14 različitih adresa; ista adresa visi na više zapisa na karti). Liste sada: IT 1.186, FR 1.234, ES 519, LAT 131, PT 187, CS 62, SK 17, ZA 213, INTL 422, ukupno 3.971. Zapis `out/inventar_0911/mailjet_maknuto_0911.json`. Jedna adresa u Snov nacrtu (info@elingforest.com.au, vinarija već dobila mail na drugu adresu) miče se u provjeri prije paljenja.
