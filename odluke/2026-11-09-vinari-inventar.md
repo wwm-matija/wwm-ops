@@ -76,6 +76,37 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - Prije slanja: probni mailovi 9 od 9 u INBOX (desk@worldwinerymap.org), provjere pošiljatelja prolaze, linkovi rade. S Mailjet lista maknute ukupno 22 adrese: 14 (profil, naša lista, već dobili mail) i 8 pod krivim imenom vinarije (nađeno usporedbom s `MAIL_VAN.csv`). Usporedba s 25 starih izvora sa starog laptopa: drugih poklapanja nema.
 - U tekstovima ostaje »90 zemalja« (Matija: »ne mijenjaj zemlje, trajat će predugo«).
 
+## Lov na mailove: rezultat (9.11., oba prolaza gotova)
+
+**Prolaz webova** (31.391 domena, 5.339 s u tri procesa; web radi kod 26.360):
+
+| skupina | vinarija | web radi | mail na domeni weba + ime vinarije | ostalo |
+|---|---|---|---|---|
+| A bez maila, ima web | 11.546 | 10.012 | 3.968 | samo besplatni mail na webu 1.139; bez maila na webu 3.254 |
+| P samo PEC | 439 | 321 | 164 | |
+| B samo besplatni mail | 6.737 | 6.026 | 638 | naš mail piše na webu 4.061 |
+| C vlastita domena, neposlane | 16.056 | 12.993 | | naš mail piše na webu 9.420; pravi web 12.658 |
+
+**AI način** (26.259 vinarija bez weba, 31,51 USD; svaki mail provjeren otvaranjem izvora, `alati/lov_ai.py ocjena`):
+
+| ocjena | vinarija |
+|---|---|
+| POTVRĐEN + mjesto (mail, ime i mjesto pišu na izvoru) | 5.826 |
+| potvrđen bez mjesta (2.330 jer mjesta nemamo u bazi, 1.462 jer ga nema na stranici) | 3.792 |
+| mail na izvoru, ime nije | 1.980 |
+| ime na izvoru, mail nije | 1.722 |
+| izvor se ne otvara | 2.410 |
+| samo PEC ili uprava | 2.966 |
+| bez maila u odgovoru | 6.833 |
+| ni mail ni ime na izvoru | 729 |
+
+- POTVRĐEN + mjesto: vlastita domena 4.023, besplatni mail 1.803. Po zemlji: IT 2.816, FR 1.248, ES 348, AT 309, US 276, DE 214, CH 183, HU 93. U isključenim zemljama 747, za slanje 5.079.
+- Od 1.961 vinarije kojoj je jedini mail PEC, novi obični mail potvrđen je za 276.
+- **Zbroj novih mailova po strogom pravilu: 3.968 + 164 + 5.826 = 9.958 vinarija.** U bazu nije upisano ništa.
+- Popisi: `out/lov/AI_MAILOVI.csv` (laptop), `hetzner:/mnt/HC_Volume_106719381/lov_mailova_2026-11-09/` (web_rezultat_*.jsonl, ai/).
+
+Otvoreno za Matiju: (1) kako novi mailovi ulaze u bazu vinarija (paket kroz lanac objave ili samo lista za slanje); (2) Snov provjera novih adresa na vlastitoj domeni (krediti: 3.869 na računu); (3) »potvrđen bez mjesta« 3.792: uzeti ili ručni pregled uzorka.
+
 ## GR, CY, BR: izravni link na profil (nacrti složeni 9.11., NIJE upaljeno)
 
 Matija 9.11.: »sredi snov za ove br gr«, tekst odobren (»Da, složi nacrte«). Paljenje tek na njegovo »šalji«.
