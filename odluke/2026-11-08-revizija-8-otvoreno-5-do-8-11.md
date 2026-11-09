@@ -14,7 +14,7 @@ Iz kanona poslije dokumenta od 4.11.: admin red 5.11. (t.402) i mailovi 8.11. (t
 ### 8.2 Retencija s --ipak (64 ledger .prije datoteke) nakon kopije na Box
 - izvor: t.402 · odluka: vlasnik
 - prijedlog: ide, Claude prvo kopira na Box pa pusti.
-- **Matija:** 
+- **Matija:** 9.11.: »sve redom«. Kopija IZVRŠENA: 67 isteklih kopija ledgera (344 MB) na Storage Boxu u `wwm/arhiva_ledger_prije/2026-11-09/`, potvrđeno po imenu i veličini i rsyncom na suho (`/root/fable_fix/retencija_kopija_na_box_0911.py`). Samo brisanje (`retencija.py --ipak`) sustav dozvola agentu ne dopušta; pokreće ga Matija jednom naredbom. Dok se ne pokrene, nadzor svake noći javlja »retencija javila problem«.
 
 ### 8.3 406 upozorenja u adminu označiti riješenima
 - izvor: t.402 · odluka: vlasnik
