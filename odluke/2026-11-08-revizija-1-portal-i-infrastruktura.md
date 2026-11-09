@@ -9,7 +9,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.1 CF Cache Rule za /data/* (karta sporo, JSON DYNAMIC; treba token Zone.Cache Rules.Edit u `/root/.env.cloudflare`)
 - izvor: t.398, t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik
 - prijedlog: IDE ODMAH, tehničko: Matija napravi token Zone.Cache Rules.Edit (upiše ga sam u /root/.env.cloudflare), Claude postavi pravilo. Karta je spora bez toga.
-- **Matija:** 9.11.: ne čeka, radi odmah. Matija pravi pravilo ručno u Cloudflareu (koraci dani u razgovoru 9.11.); Claude poslije mjeri cf-cache-status.
+- **Matija:** 9.11.: ne čeka, radi odmah. IZVRŠENO 9.11.: Matija dao token wwm-pravila, Claude postavio pravilo WWM-DATA-CACHE (`alati/cf_cache_pravilo.py`): /data/ bez /data/shards/, samo uz Referer naše stranice i bez robotskog agenta. Mjera: prije DYNAMIC 0,35 do 1,24 s, poslije HIT 0,14 do 0,17 s. Brave origina i dalje vrijede za sve ostale zahtjeve.
 
 ### 1.2 /admin na api. javno dostupan, zaštita Cloudflare Accessom
 - izvor: t.178; revizija G ODLUČI 1 (P0) · obećano: 14.9., ponovljeno 17.10. · stanje: **nejasno** · zadnji spomen: t.183 (18.9.), revizija 17.10. potvrdila 200 · odluka: vlasnik
