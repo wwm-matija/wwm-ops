@@ -14,6 +14,8 @@ Napravljeno 2026-11-08. Jedna datoteka po području; Matija piše ispod svake st
 | 8 | Otvoreno od 5. do 8.11. | [2026-11-08-revizija-8-otvoreno-5-do-8-11.md](2026-11-08-revizija-8-otvoreno-5-do-8-11.md) | 9 | 9 | 8 |
 | | **ukupno** | | **100** | | |
 
+Nova: [2026-11-09-struganje-i-uvjeti.md](2026-11-09-struganje-i-uvjeti.md) (ODLUČI: 6 točaka).
+
 Nova: [2026-11-09-granice-eurogeographics.md](2026-11-09-granice-eurogeographics.md) (ODLUČI: izvor za HR vinogorja i termin).
 
 Ostale otvorene odluke: `2026-11-08-mailovi-pilot.md` (ODLUČENO), `2026-11-08-sustav-rada.md` (ODLUČENO).

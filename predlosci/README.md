@@ -8,6 +8,7 @@ programski provjeri da u tijelu nema znakova — i –.
 | datoteka | za koga | kad |
 |---|---|---|
 | `vinarije.md` | vinarije koje odgovaraju na naš mail ili pišu na contact@ | preuzimanje profila, ispravak, dvojnik, potvrda računa, pitanja o Pro i značkama, objašnjenje što smo |
+| `pro_dobrodoslica.md` | novi Pro kupac | dobrodošlica nakon uplate; NACRT 9.11., čeka Matijine ispravke |
 | `mediji_wine_news.md` | mediji koji su pristali na Wine News | »ništa ne trebate, start 1.12., račun početkom 11., test« |
 
 **Tko potpisuje.** Odgovor ide iz sandučića u koji je primatelj pisao i potpisuje ga ime kojim je ta nit dosad
