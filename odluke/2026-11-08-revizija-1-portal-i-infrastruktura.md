@@ -14,7 +14,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.2 /admin na api. javno dostupan, zaštita Cloudflare Accessom
 - izvor: t.178; revizija G ODLUČI 1 (P0) · obećano: 14.9., ponovljeno 17.10. · stanje: **nejasno** · zadnji spomen: t.183 (18.9.), revizija 17.10. potvrdila 200 · odluka: vlasnik
 - prijedlog: IDE: zatvoriti Cloudflare Accessom (login mailom), jedan sat posla, nulti rizik za javni dio. P0 od 14.9.
-- **Matija:** 9.11.: DA, zatvoriti Cloudflare Accessom. Treba ovlast Access na tokenu (uz Roll 12.11.) ili ručno u Zero Trust sučelju.
+- **Matija:** 9.11.: DA, zatvoriti Cloudflare Accessom. IZVRŠENO 9.11.: Matija uključio Zero Trust, `alati/cf_access_admin.py --pisi` napravio aplikaciju »WWM admin« za api.worldwinerymap.com/admin (sesija 24 h), pravilo »samo vlasnik« (jedna adresa). Izvana /admin vraća 302 na prijavu; /api/admin i javni API nepromijenjeni; cron ide na 127.0.0.1.
 
 ### 1.3 RareCloud ključ ima root na Hetzneru, maknuti ili dati vlastiti bez roota
 - izvor: revizija G ODLUČI 2 (P0); t.183 · obećano: 17.10. · stanje: **nejasno** · zadnji spomen: t.183 · odluka: vlasnik
