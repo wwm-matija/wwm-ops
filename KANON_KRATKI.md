@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 321, najnoviji t.406). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:40 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 322, najnoviji t.407). Napravio `alati/kanon_kratki.py` 09.11.2026. 14:34 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.407 · 9.11.2026. · bez objave
+
+**B2B VINARI 9.11.: MAILJET RUNDA 2 POSLANA (9 KAMPANJA, 3.963 ADRESE) I SNOV K1Z C5 UPALJEN (19 KAMPANJA, 1.740 ZELENIH); INVENTAR SVIH VINARIJA PO KANALU; LOV NA MAILOVE (WEB 31.391 DOMENA, AI NACIN 26.259 UPITA); UPUTA DATAFORSEO U REPOU**
+
+(9.11.2026.; vlasnik: »ne mijenjaj zemlje trajat ce predugo. salji oboje«)
+
+Biljezi: `B2B-SLANJE-I-LOV-2026-11-09`
+
+Pouke: (1) Ista adresa visi na vise zapisa na karti (jedna Martinelli adresa na 8 zapisa): preklop poslano/ceka raditi po adresi I po vinariji. (2) MAIL_VAN nije lista odjava nego krivo spojenih mailova; adresa maknuta s krive vinarije zna ostati na listi pod krivim imenom, usporediti prije svakog slanja. (3) Za vinarije bez weba Google AI nacin (serp/google/ai_mode, 0,0012 USD) daje tri puta vise od obicne pretrage, ali mail vrijedi tek kad na izvoru pise uz ime i mjesto; PEC i domene uprave van. (4) AI nacin ne prima portugalski; task_post zna odbiti dio paketa (40200 uz dovoljno novca), posalji je idempotentan pa se ponovi. (5) Ponovni task_get je besplatan. (6) Vlasnik pod »crne liste« misli na nasu listu ne kontaktirati, ne na Spamhaus.
+
+Otvoreno: Odgovori i bounce runde 2 (sandučić contact@prvoiceglobal.com na HostArmadi) i Snov C5; kupljenje i provjera AI rezultata na izvoru (lov_ai.py kupi, ocjena); obrada rezultata prolaza webova; popis GR/BR/CY zelenih za izravni link (150 dnevno, Snov provjera na rijec); zute u Mailjet r3 i besplatni mail kao poseban paket (odobreno, liste nisu slozene); DACH i ex-YU odluka u petak 13.11.; stari izvori koji jos nisu u NE_KONTAKTIRATI (76 iz Snov DNE lokalno 4.10., bounce 20.9. do 2.10.).
 
 ## t.406 · 9.11.2026. · bez objave
 
@@ -289,14 +301,4 @@ Biljezi: `WG-VINOGRAD-POPUP-2026-10-21`
 Biljezi: `WD-V25-EU-2026-10-20`
 
 Otvoreno: volumen 5 G (revizija diskova); 1 novi tekst ceka (id 1899); `eu_1020_privremeno` 3,7 GB na `/`; test_novo 1337 OK, 5 LOSE (JOURNAL_RED dirnut iz druge sesije, P1-28 slike/tekstovi mijenjani tijekom testa, admin brojke); Malta LPIS 2021 portal 403
-
-## t.377 · 19.10.2026. · bez statusa
-
-**DRUGI PAKET OBRISA VINARA (41), GENERACIJA v24, OBJAVA #82, karta v10069, SHV `202610191917`; MODERACIJA 19.10.**
-
-(19.10.2026.; vlasnik: »gdje su od Martina vinogradi?« pa »moze li pecenje sad?« pa »moze«)
-
-Biljezi: `WC-V24-DRW2-2026-10-19`
-
-Otvoreno: 1 obris pending (id 744); CF token rok 28.10.; prijevodi novih kljuceva dashboarda
 
