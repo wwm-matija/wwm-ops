@@ -74,6 +74,26 @@ Strojno vrijeme: jednokratno 382 s, po regiji 0,19 do 2,50 s; izračun za 171 re
 
 Predloženi prag za »normalno«: razlika površine do 1 %, simetrična razlika do 4 %, pomak ruba do 600 m, nijedna nespojena šifra, vinarija koja mijenja stranu najviše 100 m od ruba. Otoci, sporne granice i podijeljene općine uvijek na pregled.
 
+## Puna proba, svih 179 regija (9.11.2026., izvještaj pomoćnog agenta; brojke nisu ponovno mjerene)
+
+Datoteke: `hetzner:/mnt/HC_Volume_106719381/proba_granice_2026-11-09/` (`IZVJESTAJ_PUNA_PROBA.md`, `kandidat_regije.geojson`, `USPOREDBA_SVE.csv`, `VINARIJE_MIJENJAJU.csv`, `licenca_dgu/`). Ništa živo nije mijenjano.
+
+**Licenca DGU:** data.gov.hr za skup navodi Otvorenu dozvolu; INSPIRE metapodaci kažu da su uvjeti ponovne uporabe u skladu s otvorenom dozvolom i da nema ograničenja javnog pristupa; ATOM zapis spominje ograničenje pristupa po čl. 13. i proturječi metapodacima. Po NN 67/2017 (čl. 4. i 5.) komercijalna uporaba je dopuštena uz navođenje izvora i datuma izmjene. Ocjena agenta: za korištenje vrijedi Otvorena dozvola, ATOM je pogrešna oznaka pristupa.
+
+**Vinogorja koja ne odgovaraju Pravilniku NN 76/2019** (danas / po Pravilniku, km²): Hvar 75,9 / 313,4; Krk 107,2 / 427,7; Korčula 111,8 / 276,2; Pag 154,7 / 317,8 (fale Novalja, Kolan, Povljana); Rab 75,9 / 102,1 (fali Lopar); Vis 53,5 / 101,1; Zadar-Biograd 1.290,9 / 1.303,4 (fali Tkon). Sedam, ne četiri.
+
+**Izgrađeno:** HR 72 (po Prilogu I.), ES 55 (32 po čistom popisu, 8 po službenoj granici IGN-a, 15 izvedeno iz današnje geometrije), FR 52 (izvedeno; propisi daju samo imena). 21 FR-igp na departmanima nije dirano.
+
+**Ocjena po pragu:** 58 normalno, 121 na pregled (HR 29/43, ES 14/41, FR 15/37). Razlozi pregleda: pomak ruba iznad 600 m (81), podijeljene općine (37), simetrična razlika iznad 4 % (24), otoci (21), nespojene šifre (13 FR regija, 41 općina koja je u međuvremenu spojena). Tri regije su na spornoj granici na Dunavu; Baranja +8,62 % površine.
+
+**Vinarije:** 91 mijenja regiju; 50 ulazi u ispravljena otočna vinogorja, 59 je dalje od 100 m od ruba.
+
+**Samo približno, kao i danas:** Plešivica-Okić, Zagreb i Vukomeričke gorice (rez Savom), Rías Baixas (parohije), Navarra (concejos), 11 ES-igp koje uzimaju dijelove općina. Sveta Jana nije izgrađena (definirana katastarskim općinama).
+
+**Trajanje:** cijeli prolaz 441,7 s; jednokratna priprema 382 s.
+
+**Otvoreno za Matiju:** (1) prihvaća li ocjenu licence DGU; (2) prag od 600 m baca 81 regiju na pregled, vjerojatno je prestrog za velike regije: pregled po uzorku ili prag razmjeran veličini; (3) ispravak svih sedam vinogorja, ne samo četiri; (4) 59 vinarija koje mijenjaju regiju daleko od ruba treba pogledati prije zamjene.
+
 ## Odluka
 - Matija 9.11.: »ok, kreni«, po čistoj varijanti (službeni nacionalni izvori), odmah.
 - Matija 9.11.: otočna vinogorja (Hvar, Krk, Korčula, Vis) ispraviti na cijeli otok u istom poslu.
