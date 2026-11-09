@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 320, najnoviji t.405). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:33 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 321, najnoviji t.406). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:40 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.406 · 9.11.2026. · bez objave
+
+**PROBA POVRATA IZ KOPIJA PROSLA (5 OD 5, 81 s); NADZOR CITA I backup_box.log (P0 KOPIJE IZ REVIZIJE G ODLUCI 3, t.98, t.103)**
+
+(9.11.2026.; vlasnik: »Da, sve tri«)
+
+Biljezi: `PROBA-POVRATA-2026-11-09`
+
+Pouke: t.98 (backup.sh bez trap ERR) vodio se otvorenim, a alarm je od rujna rjesavao nadzor; pravo otvoreno bilo je sto nadzor ne cita backup_box.log. Stavke »nejasno« iz revizije prvo provjeriti u kodu, pa tek onda graditi. Proba povrata cijelog lanca traje 81 s, moze ici mjesecno.
+
+Otvoreno: Vlasnik da potvrdi da je kljuc Boxa na USB-u. Tajne (.env datoteke) nisu ni u jednoj kopiji: vlasnik da potvrdi drzi li ih izvan servera. Nadzor ne provjerava da je backup_box uopce krenuo (nema provjere starosti zadnjeg »backup_box gotov«); dodati uz iduci paket popravaka. Dnevni lazni alarm »retencija javila problem« (brava ledgera) ostaje dok se ne odluci stavka 8.2 (--ipak nakon kopije na Box). Proba povrata u cron jednom mjesecno: ceka rijec.
 
 ## t.405 · 9.11.2026. · bez objave (Access uzivo 9.11.)
 
@@ -287,14 +299,4 @@ Otvoreno: volumen 5 G (revizija diskova); 1 novi tekst ceka (id 1899); `eu_1020_
 Biljezi: `WC-V24-DRW2-2026-10-19`
 
 Otvoreno: 1 obris pending (id 744); CF token rok 28.10.; prijevodi novih kljuceva dashboarda
-
-## t.376 · 19.10.2026. · bez statusa
-
-**SUSTAVSKI MAILOVI: OMOT, TEXT/PLAIN, REPLY-TO, POTPIS I PODACI TVRTKE**
-
-(19.10.2026., oko 12:40 UTC; povod: Fontecuore 19.10.2026., potvrda racuna isporucena u spam kod Alpimedije)
-
-Biljezi: `WB-MAIL-OMOT-2026-10-19`
-
-Otvoreno: isporuka u sandučić se i dalje ne mjeri (nema Resend webhooka); novi mail u app.py ne treba nista posebno, omot ga pokriva sam (samo tijelo, bez vlastitog potpisa, ili s `MAIL_POTPIS_IME` ako ga ima); u tijelo maila nikad brojke nase mjere (parcele, hektari).
 
