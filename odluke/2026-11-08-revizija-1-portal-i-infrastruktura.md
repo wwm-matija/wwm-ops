@@ -24,7 +24,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.4 Kopije: snapshot Storage Boxa, proba povrata, drugi ključ izvan stroja (t.103), `backup.sh` trap ERR (t.98), `fable_fix` u kopiji (t.176)
 - izvor: revizija G ODLUČI 3 (P0) · obećano: 8.9. do 17.10. · stanje: **otvoreno** · zadnji spomen: t.98, t.103, t.176 bez zatvaranja · odluka: vlasnik + tehničko
 - prijedlog: IDE u popravke: trap ERR u backup.sh, proba povrata jednom mjesečno, drugi ključ Boxa kod Matije offline. P0, bez toga kopije nisu dokazane.
-- **Matija:** 9.11.: »ne razumijem«; Claude objašnjava jednostavnije pa pita ponovno.
+- **Matija:** 9.11.: »Da, sve tri«. IZVRŠENO 9.11.: (a) proba povrata `alati/proba_povrata.py` prošla 5 od 5 za 81 s (dnevna baza, fotografije, off-site Namecheap, Box cijela baza, Box izvor); (b) alarm je već postojao u nadzor.py za dnevnu kopiju, dodan `/root/backup_box.log` u nadzor (zakrpa s kopijom); (c) ključ Boxa: Matiji dana naredba za primjerak na USB, čeka potvrdu. Novo otvoreno: tajne (.env) nisu ni u jednoj kopiji; drži li ih Matija izvan servera?
 
 ### 1.5 Izložene tajne: zamjena Resend ključa (6.9.) i WAF tokena (20.9.), tajne iz memorija u .env
 - izvor: revizija G ODLUČI 4 (P0) · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija G · odluka: vlasnik
