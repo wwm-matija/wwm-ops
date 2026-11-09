@@ -9,13 +9,13 @@ Ova datoteka je kopija da je vide svi agenti. Kad Matija odluči u dokumentu, od
 
 **Mailjet runda 2 (vinarije, 3.985 adresa, 9 nacrta u Mailjetu, pošiljatelj contact@prvoiceglobal.com)**
 1. Tekstovi: idu kakvi jesu ili se mijenjaju? Cijeli tekstovi: `predlosci/mailjet_b2b_r2.md`.
-   - **Matija:**
+   - **Matija:** 9.11. (u dokumentu): »ako su takve dobivali već, ok je onda«. Runda 1 je išla s istim kosturom, dakle tekstovi ostaju.
 2. Redoslijed: svih devet skupina isti dan, ili prvo IT i FR pa ostale nakon što se vide odjave?
-   - **Matija:**
+   - **Matija:** 9.11.: isti dan, svih devet.
 3. Tko pokreće slanje: Matija klikom u Mailjetu ili agent kroz API na njegovu riječ?
-   - **Matija:**
+   - **Matija:** 9.11.: agent kroz API, tek kad Matija u razgovoru napiše »šalji«.
 4. Prije slanja čišćenje lista prema `out/NE_KONTAKTIRATI.csv` i domenama koje su u međuvremenu preuzele profil?
-   - **Matija:**
+   - **Matija:** 9.11.: da; i PRIJE svega skupiti stare odjave i odbijanja iz Snova i iz odgovora (»oni stari što su se micali davno«). Slanje ne kreće dok lista nije potpuna.
 
 **Niše (mediji, val od 30.10.)**
 5. Novi krug za 1.809 adresa kojima mail nije otišao: ide li i s kojim tekstom (31.10.: »pauziraj, mijenjam body«)?
