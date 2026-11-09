@@ -24,7 +24,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 2.4 Dobrodošlica Kristančiću (prvi kartični Pro kupac)
 - izvor: t.397, t.398, t.400 · obećano: 3.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik
 - prijedlog: ČEKA Matiju: prvi kartični Pro kupac bez dobrodošlice. Prijedlog: odmah, predložak V-dobrodošlica piše Matija (nema ga još).
-- **Matija:** 9.11.: nacrt dobrodošlice sad; postaje predložak za iduće Pro kupce.
+- **Matija:** 9.11.: nacrt dobrodošlice sad; postaje predložak za iduće Pro kupce. Nacrt u `predlosci/pro_dobrodoslica.md`; Matija maknuo prvi odlomak, mail se preskače do petka 13.11.
 
 ### 2.5 Odgovori Lyons, Ve Oh Lay Acres, Traerte + 3 granice; sandučić contact@prvoiceglobal.com 64 poruke, Sent 0
 - izvor: t.398, t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik

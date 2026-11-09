@@ -1,6 +1,6 @@
 # Predložak: dobrodošlica novom Pro kupcu
 
-Status: NACRT 9.11.2026., čeka Matijine ispravke. Dok ga on ne potvrdi, ne šalje se nikome.
+Status: NACRT 9.11.2026. Matija 9.11.: prvi odlomak (zahvala na povjerenju) maknut; mail Kristančiču se ne šalje sad, vraćamo se u petak 13.11. Dok ga on ne potvrdi, ne šalje se nikome.
 
 Kad: vinarija je platila Terroir Pro (kartica kroz Dodo ili virman). Šalje se jednom, iz `contact@worldwinerymap.com`,
 potpisuje Matija osobno. Kratko, osobno, s jednom konkretnom stvari koju smo vidjeli u njihovu profilu i jednim
@@ -14,8 +14,6 @@ Podatke za zamjene agent čita iz admina, ne izmišlja. Ako nema što konkretno 
 
 ```
 Poštovani {OSLOVLJAVANJE},
-
-hvala Vam na povjerenju. {AKO_JE_PRVI: Vi ste prva vinarija koja je Terroir Pro uzela karticom, i to mi puno znači.}
 
 {ŠTO_SMO_VIDJELI}
 
@@ -33,8 +31,6 @@ osnivač, World Winery Map
 ```
 Poštovani gospodine Kristančič,
 
-hvala Vam na povjerenju. Vi ste prva vinarija koja je Terroir Pro uzela karticom, i to mi puno znači.
-
 Vidio sam da ste isti dan upisali 23 parcele s imenima, među njima Breg, Rutars i Cerovo. Na karti se sad vidi svaki Vaš vinograd posebno.
 
 Jedna stvar bi Vam odmah pomogla: kratak opis vinarije, par rečenica Vašim riječima. Kad ga upišete, Vašu stranicu možemo objaviti i kao priču u našem Journalu, s Vašim vinogradima i podacima o položaju.
@@ -50,8 +46,6 @@ osnivač, World Winery Map
 
 ```
 Dear {OSLOVLJAVANJE},
-
-thank you for your trust. {AKO_JE_PRVI: You are the first winery to take Terroir Pro by card, and that means a lot to me.}
 
 {ŠTO_SMO_VIDJELI}
 
