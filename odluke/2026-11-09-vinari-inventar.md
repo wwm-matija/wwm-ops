@@ -69,6 +69,32 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - Nove adrese ne idu u Snov bez provjere: prvo lokalno (MX, web, ime), u Snov verifikaciju samo SIGURNO i na tvoju riječ.
 - Agenti (Opus) samo za presudu gdje skripta nije sigurna. Skripta radi vađenje.
 
+## Izvršeno 9.11. poslije odluka
+
+- **Mailjet runda 2:** maknuto 14 adresa s lista (28 redaka u popisu bilo je 14 različitih adresa; ista adresa visi na više zapisa na karti). Liste sada: IT 1.186, FR 1.234, ES 519, LAT 131, PT 187, CS 62, SK 17, ZA 213, INTL 422, ukupno 3.971. Zapis `out/inventar_0911/mailjet_maknuto_0911.json`. Jedna adresa u Snov nacrtu (info@elingforest.com.au, vinarija već dobila mail na drugu adresu) miče se u provjeri prije paljenja.
+- **Lov kroz web** (`alati/lov_priprema.py`, `alati/lov_web.py`): ulaz 31.391 domena, 34.778 vinarija: A bez maila 11.546, B samo besplatni mail 6.737, C vlastita domena izvan isključenih zemalja 16.056, P PEC 439. Proba na 200 domena: 1,44 domene/s po procesu. Cijeli prolaz pokrenut 9.11. 13:02 UTC u tri procesa (`lov-web-0..2`), rezultat u `hetzner:/mnt/HC_Volume_106719381/lov_mailova_2026-11-09/web_rezultat_*.jsonl`.
+- Proba 200 domena, skupina A (69 vinarija): web radi kod 60, mail na domeni weba kod 27, samo besplatni 4, samo tuđa domena 7, bez maila na webu 21. Skupina C (107): web radi kod 86, ime vinarije na webu 66, naš mail piše na webu kod 58.
+- Bez weba, a s mailom koji ne valja: PEC 1.961 i besplatni 5.544 nemaju upisan web, idu u pretragu zajedno s 24.298 bez ičega.
+
+## Test pretrage, 200 vinarija bez weba (9.11., `alati/lov_pretraga.py`)
+
+Jeftini red DataForSEO, 943 upita, 0,57 USD (po odgovoru API-ja), 11 jezika, 18 zemalja. Pet varijanti po vinariji. Svaki kandidat je zatim otvoren i provjereno piše li na njemu ime i mjesto.
+
+| varijanta | našla web s imenom vinarije | jedina koja ga je našla |
+|---|---|---|
+| V1 "ime" mjesto | 15 | 3 |
+| V2 ime mjesto + riječ za vinariju (lokalni jezik) | 28 | 10 |
+| V3 ime mjesto + kontakt email | 15 | 1 |
+| V4 ime + adresa | 13 | 0 |
+| V5 ime mjesto winery (engleski) | 13 | 0 |
+
+- Web s imenom vinarije: 38 od 200 (19 %). Od toga i mjesto na stranici: 15 (7,5 %). Mail na tim stranicama: 27 od 38.
+- V1+V2 nalaze 32 od 38, V1+V2+V4 35, svih pet 38. Adresa i engleski ne donose gotovo ništa novo.
+- Prvo sito (ime u domeni ili naslovu) pustilo je 134 kandidata, a 82 su bili imenici i tuđe stranice. Bez otvaranja stranice rezultat se ne smije uzeti.
+- Facebook ili Instagram stranica s imenom vinarije pojavila se kod 126 od 200 (nije provjereno otvaranjem).
+- Italija: mnogo zapisa su osobna imena iz registra (»BIANCO ALDO«), za njih weba najčešće nema.
+- Trošak cijelog prolaza (24.298 + 1.961 + 5.544 = 31.803 vinarije): samo V2 19,08 USD; V1+V2 38,16 USD.
+
 ## Odluka (Matija 9.11.)
 
 1. Mailjet runda 2: »da makni« (28 adresa). Slanje i dalje samo na njegovo »šalji«.

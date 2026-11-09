@@ -21,6 +21,8 @@ from urllib.parse import urljoin, urlparse, unquote
 import requests, urllib3
 
 urllib3.disable_warnings()
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 MAIL = re.compile(r"[A-Za-z0-9][A-Za-z0-9._%+\-]{0,48}@[A-Za-z0-9][A-Za-z0-9.\-]{1,60}\.[A-Za-z]{2,12}")
 AT = re.compile(r"\s*(?:\[|\(|\{)\s*(?:at|chiocciola|arroba|ät|et|kukac|zavináč)\s*(?:\]|\)|\})\s*|\s+(?:\[at\]|\(at\))\s+", re.I)
@@ -165,6 +167,9 @@ def obradi(z):
     for v in z["vinarije"]:
         r = rijeci_imena(v["ime"])
         out["vinarije"].append(dict(v, ime_na_webu=ime_na(sav, v["ime"]), ime_u_domeni=(any(w in dn for w in r if len(w) >= 4) if r else None)))
+        if v.get("gr"):
+            g = bez_naglasaka(v["gr"]).strip()
+            out["vinarije"][-1]["mjesto_na_webu"] = bool(g) and len(g) >= 3 and g in sav
     out["s"] = round(time.time() - t0, 1)
     return out
 
