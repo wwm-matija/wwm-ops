@@ -59,7 +59,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.11 Uvjeti korištenja i struganje: 8 odluka (AI trening, robots za /data/, zamke, crna lista)
 - izvor: t.324; revizija G #15 · obećano: 3.10. · stanje: **nejasno** · zadnji spomen: t.324 · odluka: vlasnik
 - prijedlog: ČEKA: 8 odluka iz t.324 prepisati u zasebnu odluku kad Matija ima vremena; nije hitno dok Worker brani popis.
-- **Matija:** 
+- **Matija:** 9.11.: pripremi kao kratku odluku (8 točaka s prijedlogom).
 
 ### 1.12 DMARC dopune (365promo.shop, prvoice.site, wwm.eu...), Postmaster Tools, 769 nepročitanih DMARC izvještaja
 - izvor: revizija G ODLUČI 11, 12 · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija G · odluka: vlasnik

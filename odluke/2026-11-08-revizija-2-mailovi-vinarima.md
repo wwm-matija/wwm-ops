@@ -9,12 +9,12 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 2.1 Mailovi pogođenima kvarom kartice »Mark your vineyards« (Reja, Giovinale, Poema; nacrti 11.10.) i potvrde Gorjup/Kolonics/Pacos
 - izvor: t.365, t.366, t.367, t.370; revizija D ODLUČI 12 · obećano: 11.10. · stanje: **nejasno** · zadnji spomen: t.370; t.387: 35 nacrta spremno, ništa poslano · odluka: vlasnik
 - prijedlog: ČEKA Matijinu riječ po nacrtima; 35 nacrta spremno od 26.10., svaki dan stariji je lošiji. Prijedlog: pregledati ovaj tjedan kroz Codex (mailovi).
-- **Matija:** 
+- **Matija:** 9.11.: pregledam ovaj tjedan. Codex ih složi kao čistu listu za odobrenje (posao mailovi).
 
 ### 2.2 Odgovor Midalidare (prvi Pro upit, pitanja 1 do 4)
 - izvor: t.371 do t.373; revizija D ODLUČI 1 · obećano: 15.10. · stanje: **nejasno** · zadnji spomen: t.373 · odluka: vlasnik
 - prijedlog: ČEKA Matiju: prvi Pro upit, odgovor star 3 tjedna. Prijedlog: kratak odgovor s isprikom i cjenikom, ovaj tjedan.
-- **Matija:** 
+- **Matija:** 9.11.: odgovoreno na drugi način, kroz prodavačicu za Bugarsku. ZATVORENO.
 
 ### 2.3 Odgovor Ágnes Németh (HU, nacrt EN)
 - izvor: t.374; revizija C ODLUČI 6 · obećano: 16.10. · stanje: **nejasno** · zadnji spomen: t.374 · odluka: vlasnik
@@ -24,7 +24,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 2.4 Dobrodošlica Kristančiću (prvi kartični Pro kupac)
 - izvor: t.397, t.398, t.400 · obećano: 3.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik
 - prijedlog: ČEKA Matiju: prvi kartični Pro kupac bez dobrodošlice. Prijedlog: odmah, predložak V-dobrodošlica piše Matija (nema ga još).
-- **Matija:** 
+- **Matija:** 9.11.: nacrt dobrodošlice sad; postaje predložak za iduće Pro kupce.
 
 ### 2.5 Odgovori Lyons, Ve Oh Lay Acres, Traerte + 3 granice; sandučić contact@prvoiceglobal.com 64 poruke, Sent 0
 - izvor: t.398, t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik
