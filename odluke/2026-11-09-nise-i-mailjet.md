@@ -40,5 +40,17 @@ preskočeno bez slanja 463, žutih nikad u redu 1.346, ostalo za novi krug 1.809
 Za novi krug treba: novi tekst tijela, nove kampanje (stare se ne mogu ponovno upaliti), lokalno sklapanje i provjere svakog jezika, prikaz kroz sučelje, Matijina riječ »pali«.
 Objave vala niše: 339 upita poslano 8.11. (1,017 USD), 275 pokupljeno; kandidate obrađuje Codex po `upute/pr_objave.md`.
 
+## Stare odjave skupljene (9.11.2026., po Matijinu odgovoru na točku 4)
+
+`out/NE_KONTAKTIRATI.csv` ima 664 retka (623 adrese, 41 cijela domena):
+- Snov lista zabrana 12680120 (1.318 stavki, čitano kroz `GET /v2/blacklists/{id}/items`): 430 adresa i 291 domena pripada vlasnicima profila (usporedba s bazom: claimovi, korisnici, tablica vinarije) i NE ide na našu listu; 556 adresa i 41 domena nije vezano uz profil i to su stare odjave, odbijanja i micanja: uvezeno.
+- Sandučići na oba poslužitelja, sva pošta od kolovoza (`alati/odjave_iz_poste.py`, 6.653 poruke): 132 kandidata, nakon filtra 83, pročitani pojedinačno: 51 prava odjava ili odbijanje (43 »no« na B2B mail, 6 izričitih odjava, 2 micanja); ostalo automatske potvrde, antispam izazovi (Mailinblack, SpamEnMoins) i dva koja žele profil.
+- Mailjet runda 1: 33 tvrdo odbijena, 8 blokiranih, 15 odjava.
+
+Proba čišćenja devet Mailjet lista (prema našoj listi, Snov listi zabrana i bazi): za micanje 4 od 3.985 (IT 1 i INTL 2 već imaju profil, LAT 1 s domene koja se odjavila).
+Snov nacrti »B2B K1Z 2910« (1.740 adresa): nijedna na listi.
+Što nije pokriveno: usmene odjave i odjave koje je Matija sam riješio izvan sandučića; pošta starija od kolovoza koju je cron brisao do 21.9.; popis 22+14 iz revizije 17.10. nije uspoređen jer je dokument na starom laptopu (vjerojatno je sadržan u Snov listi).
+Snov i Mailjet se ovime NE mijenjaju; prijenos naše liste u njih je zaseban korak.
+
 ## Odluka
 (prepisuje se iz dokumenta)
