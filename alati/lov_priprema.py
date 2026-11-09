@@ -8,7 +8,7 @@ lov_priprema.py: složi ulaz za lov na mailove vinarija. Radi na Hetzneru, bazu 
 Ulaz (iz --inv, ono što je složio inventar 9.11.): snov_poslano.json, preklop.json, nk.csv.
 Izlaz u MAPA:
   ulaz_web.jsonl      jedan redak po domeni: {dom, vinarije:[{wwm_id, cc, ime, skupina, mail}]}   -> za lov_web.py
-  ulaz_bez_weba.jsonl jedan redak po vinariji bez maila i bez weba: {wwm_id, cc, ime, lat, lng}  -> za lov_pretraga.py
+  ulaz_bez_weba.jsonl jedan redak po vinariji bez weba (bez maila, ili samo PEC): {wwm_id, cc, ime, lat, lng, gr, ad[, skupina, mail]}  -> za lov_pretraga.py
   priprema.json       brojke
 
 Skupine (vinarija na karti, nije kontaktirana, ne čeka u nacrtu, nije na listi ne kontaktirati, nema profil):
@@ -67,12 +67,21 @@ def main():
             else:
                 sk = "C"
                 if not dd: dd = cista_domena(md)      # web nije upisan: probaj domenu maila
-            if not dd: B["%s bez weba (ne ide u lov kroz web)" % sk] += 1; continue
+            if not dd:
+                B["%s bez weba (ne ide u lov kroz web)" % sk] += 1
+                if sk == "P": bez.append(dict(wwm_id=w, cc=cc, ime=ime, lat=lat, lng=lng, skupina="P", mail=adrese[0]))
+                continue
         if DRUSTVENE.search(dd): B["%s: web je društvena mreža ili graditelj stranica" % sk] += 1; continue
         po_dom[dd].append(dict(wwm_id=w, cc=cc, ime=ime, skupina=sk, mail=adrese[0] if adrese else ""))
         B["%s u lov kroz web" % sk] += 1
     with io.open(mapa + "/ulaz_web.jsonl", "w", encoding="utf-8") as f:
         for d in sorted(po_dom): f.write(json.dumps(dict(dom=d, vinarije=po_dom[d]), ensure_ascii=False) + "\n")
+    try:
+        t = sqlite3.connect("file:/root/vino_world/tiles/wineries.db?mode=ro", uri=True)
+        GA = {x: (g or "", ad or "") for x, g, ad in t.execute("select wwm_id, gr, ad from w")}
+    except Exception:
+        GA = {}
+    for r in bez: r["gr"], r["ad"] = GA.get(r["wwm_id"], ("", ""))
     with io.open(mapa + "/ulaz_bez_weba.jsonl", "w", encoding="utf-8") as f:
         for r in bez: f.write(json.dumps(r, ensure_ascii=False) + "\n")
     B["domena za lov"] = len(po_dom)
