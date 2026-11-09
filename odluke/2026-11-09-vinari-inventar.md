@@ -118,6 +118,22 @@ Matija: »možeš li pitati onaj AI snippet za te pojmove, pa izvući odgovor, i
 
 Popisi: `odluke/2026-11-09-lov-pretraga-uzorak.md`, `odluke/2026-11-09-lov-ai-uzorak.md`.
 
+### Treći test: jedan upit, pretraga s AI odgovorom, istih 200 (9.11.)
+
+Upit isti kao u AI načinu (»ime mjesto email«), `load_async_ai_overview: true`, 200 × 0,0012 = 0,24 USD.
+
+| | pretraga s AI odgovorom | AI način |
+|---|---|---|
+| odgovor AI-ja se pojavio | 143 od 200 | 189 od 189 |
+| mail potvrđen iz AI odgovora | 68 (s mjestom 40) | 93 (s mjestom 59) |
+| pravi web iz istog upita (panel i obični rezultati), s mailom | 25 | nema |
+| **vinarija s potvrđenim mailom** | **79** | **93** |
+| isto, bez PT i BR (AI način ih nije primio) | 76 | 93 |
+
+- AI način je bolji: 93 prema 76 na istim vinarijama. Kod obične pretrage Google AI odgovor ne pokaže za 57 od 200 upita.
+- Metode se dijelom nadopunjuju: 63 su našle obje, 30 samo AI način, 16 samo pretraga s AI odgovorom, zajedno 109 od 200.
+- Prijedlog: svih 26.259 kroz AI način (31,51 USD); PT i BR kroz pretragu s AI odgovorom jer AI način ne prima portugalski. Drugi krug drugom metodom samo za neriješene je moguć kasnije: u testu bi dodao 16 na 200.
+
 ## Odluka (Matija 9.11.)
 
 1. Mailjet runda 2: »da makni« (28 adresa). Slanje i dalje samo na njegovo »šalji«.
