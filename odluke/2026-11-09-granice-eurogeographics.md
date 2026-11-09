@@ -75,4 +75,6 @@ Strojno vrijeme: jednokratno 382 s, po regiji 0,19 do 2,50 s; izračun za 171 re
 Predloženi prag za »normalno«: razlika površine do 1 %, simetrična razlika do 4 %, pomak ruba do 600 m, nijedna nespojena šifra, vinarija koja mijenja stranu najviše 100 m od ruba. Otoci, sporne granice i podijeljene općine uvijek na pregled.
 
 ## Odluka
-(Matija piše ovdje)
+- Matija 9.11.: »ok, kreni«, po čistoj varijanti (službeni nacionalni izvori), odmah.
+- Matija 9.11.: otočna vinogorja (Hvar, Krk, Korčula, Vis) ispraviti na cijeli otok u istom poslu.
+- Otvoreno: licenca DGU (točka 2 gore) i pregled iznimaka iz pune probe prije zamjene i objave.
