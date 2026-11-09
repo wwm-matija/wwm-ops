@@ -44,5 +44,35 @@ preseljeni u `/mnt/wwm/arhiva/predaja_2026-09-08/vinogorja` (povrat opisan u `PO
 
 Trajanje ne procjenjujem; korak 3 ću izmjeriti na 10 regija i onda dati brojku.
 
+## Proba na 10 regija (9.11.2026., pomoćni agent, ništa živo nije mijenjano)
+
+Izvještaj: `hetzner:/mnt/HC_Volume_106719381/proba_granice_2026-11-09/IZVJESTAJ_PROBA_GRANICE.md`. Rađeno po službenim izvorima, ne geoBoundaries.
+
+Izvori, sva tri se skidaju bez prijave: HR DGU INSPIRE Upravne jedinice (556 jedinica, šifra = matični broj); ES IGN WFS INSPIRE (CC BY 4.0); FR ADMIN EXPRESS COG 2026 (Licence Ouverte 2.0).
+
+| regija | razlika površine | najveći pomak ruba | vinarija mijenja stranu |
+|---|---|---|---|
+| HR Hvar | -0,28 % | 5.734 m (otočići) | 0 |
+| HR Srijem | +0,58 % | 4.046 m (Dunav, sporna granica) | 0 |
+| HR Daruvar | -0,33 % | 451 m | 0 |
+| HR Zelina | +0,27 % | 1.066 m | 0 |
+| ES Rioja Alavesa | -0,11 % | 244 m | 0 |
+| ES Valdizarbe | -0,02 % | 229 m | 0 |
+| ES Bailén | -0,14 % | 559 m | 0 |
+| ES Ribera del Jiloca | -0,05 % | 252 m | 0 |
+| FR Côtes de Thongue | -0,01 % | 343 m | 1 (52 m od ruba) |
+| FR Côtes du Tarn | +0,04 % | 396 m | 0 |
+
+Strojno vrijeme: jednokratno 382 s, po regiji 0,19 do 2,50 s; izračun za 171 regiju oko 9 minuta. Ljudski pregled i lanac objave nisu mjereni.
+
+Što je proba otkrila, a traži odluku ili pregled:
+1. **Greška na današnjoj karti:** vinogorja Hvar, Krk, Korčula i Vis pokrivaju samo istoimeni grad, ne otok (Hvar 75,9 od 313,4 km², Krk 107,2 od 427,7, Korčula 111,8 od 276,2, Vis 53,6 od 101,1). Za cijeli Hvar u vinogorje bi ušlo još 13 vinarija. Brač je ispravan.
+2. **Licenca DGU nije jednoznačna:** data.gov.hr navodi Otvorenu dozvolu, a ATOM zapis istog skupa piše »ograničenje javnog pristupa prema članku 13. stavku 1. točki (e) INSPIRE Direktive«. Treba presuditi prije upotrebe.
+3. Popisi općina su na Storage Boxu (`wwm/arhiva_hladno/2026-09-20/predaja_2026-09-08`), ne na volumenu. HR i FR imaju samo imena, Rioja i ES-igp šifre, za Navarru i Rías Baixas popisa nema; skripte gradnje za ES i FR nisu nađene. Arhivski popis Rioja Alavesa je zagađen (4 krivo sparene općine).
+4. Srijem: 11 km² uz Dunav dolazi iz katastarske granice DGU-a; ide pod doktrinu teritorija.
+5. Nije mjereno: 8 ES-igp regija na NUTS 2021, rez Zagreba Savom, Plešivica po katastarskim općinama, parohije Rías Baixas.
+
+Predloženi prag za »normalno«: razlika površine do 1 %, simetrična razlika do 4 %, pomak ruba do 600 m, nijedna nespojena šifra, vinarija koja mijenja stranu najviše 100 m od ruba. Otoci, sporne granice i podijeljene općine uvijek na pregled.
+
 ## Odluka
 (Matija piše ovdje)
