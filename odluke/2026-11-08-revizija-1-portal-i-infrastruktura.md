@@ -34,27 +34,27 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.6 Selidba portala sa shared hostinga (Namecheap SAD) na Hetzner
 - izvor: t.302, t.312; revizija G ODLUČI 9 · obećano: 1.10. · stanje: **otvoreno** · zadnji spomen: t.302; dijagnoza sporosti t.398 · odluka: vlasnik
 - prijedlog: ČEKA odluku o terminu: velik posao (DNS, PHP/SQLite, uploadi), ali jedini pravi lijek za sporost i padove pod tuđim opterećenjem. Prijedlog: poslije 1.12. (Wine News start).
-- **Matija:** 
+- **Matija:** 9.11.: u petak 13.11., kad riješimo PR, mailove i tekuće stvari i kad Matija nastavi s prodajom koja stoji. Claude do tada pripremi plan selidbe kao zasebnu odluku.
 
 ### 1.7 gunicorn/Flask rade kao root, selidba na korisnika `wwm`
 - izvor: t.112 (P1-20); revizija G #18 · obećano: 8.9. · stanje: **otvoreno** · zadnji spomen: t.112 · odluka: tehničko
 - prijedlog: IDE u popravke, ali tek nakon Q13 drugog koraka (korisnik ops); ne odvojeno.
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.8 Pravilo zabrane pod /data/ na api. ne pokriva `.geojsonl` (6,5 GB parcela)
 - izvor: t.334 · obećano: 2.10. · stanje: **nejasno** · zadnji spomen: t.334 · odluka: tehničko
 - prijedlog: IDE u popravke: jedna linija u nginx pravilu; provjeriti izvana poslije reloada.
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.9 Lightbox ne lista slike dodirom (swipe) na mobitelu
 - izvor: t.385 · obećano: 21.10. · stanje: **otvoreno** · zadnji spomen: t.385 · odluka: tehničko
 - prijedlog: PADA ili kasnije: sitnica za mobitel, nema pritužbi; ostaviti za paket popravaka.
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.10 Isporuka sustavskih mailova se ne mjeri (nema Resend webhooka)
 - izvor: t.376; revizija N · obećano: 19.10. · stanje: **otvoreno** · zadnji spomen: t.376 · odluka: tehničko
 - prijedlog: IDE u popravke: webhook za delivered/bounced u mail_greske.log; bez toga ne znamo stižu li potvrde računa.
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.11 Uvjeti korištenja i struganje: 8 odluka (AI trening, robots za /data/, zamke, crna lista)
 - izvor: t.324; revizija G #15 · obećano: 3.10. · stanje: **nejasno** · zadnji spomen: t.324 · odluka: vlasnik
@@ -64,20 +64,20 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.12 DMARC dopune (365promo.shop, prvoice.site, wwm.eu...), Postmaster Tools, 769 nepročitanih DMARC izvještaja
 - izvor: revizija G ODLUČI 11, 12 · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija G · odluka: vlasnik
 - prijedlog: IDE djelomično: DMARC zapisi za domene koje šalju (tehničko); 769 izvještaja ne čitati ručno, sken ih broji.
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.13 Ime regije na hladnom učitavanju QR linka (»HU BV 22« umjesto »Tokaj«)
 - izvor: DANAS_1710/IZVJESTAJ_A_embed_agnes · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija · odluka: tehničko
 - prijedlog: IDE u popravke: sitnica u map.js (naslov iz regije_indeks umjesto koda).
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
 ### 1.14 contact@: obećanje odgovora u 2 radna dana bez alarma; 177 nezatvorenih upozorenja u adminu
 - izvor: t.182; revizija G ODLUČI 15 · obećano: 14.9., 17.10. · stanje: **nejasno** · zadnji spomen: t.299 (52 nova), revizija G · odluka: vlasnik + tehničko
 - prijedlog: ČEKA odluku: ili maknuti obećanje »2 radna dana« s weba, ili sken mailova dnevno (sad postoji). Prijedlog: ostaviti obećanje, sken svaki radni dan kroz Codex.
-- **Matija:** 
+- **Matija:** 9.11.: obećanje ostaje, sken svaki radni dan (Codex jutrom pokrene posao mailovi, Matija odobrava).
 
 ### 1.15 Natpis registracije u vinar.html r.615 odvraća od Gmaila, a mailovi kažu da je potvrda automatska
 - izvor: DANAS_1710/IZVJESTAJ_F_obecanja · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija · odluka: tehničko
 - prijedlog: IDE u popravke: uskladiti tekst na vinar.html s mailovima (potvrda je automatska s domenom vinarije, ručna s Gmaila).
-- **Matija:** 
+- **Matija:** 9.11.: DA, sve u jedan paket popravaka; Claude radi redom, svaki s kopijom i provjerom.
 
