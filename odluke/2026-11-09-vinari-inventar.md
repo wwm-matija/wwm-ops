@@ -69,6 +69,13 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - Nove adrese ne idu u Snov bez provjere: prvo lokalno (MX, web, ime), u Snov verifikaciju samo SIGURNO i na tvoju riječ.
 - Agenti (Opus) samo za presudu gdje skripta nije sigurna. Skripta radi vađenje.
 
+## POSLANO 9.11.2026. (Matija: »šalji oboje«)
+
+- **Mailjet runda 2:** 9 kampanja, 3.963 adrese, oko 14:35 UTC, pošiljatelj PR Voice Global <contact@prvoiceglobal.com>. IT 1.185, FR 1.230, ES 519, LAT 131, PT 186, CS 62, SK 17, ZA 213, INTL 420. Zapis `out/inventar_0911/mailjet_r2_poslano_0911.json`.
+- **Snov K1Z (C5):** 19 kampanja upaljeno 14:30 do 14:32 UTC, 1.740 zelenih adresa, limit 25 po sandučiću. Dnevnik `skripte_I/pali_c5_pali_log_0911.txt`, ledger `B2B_LEDGER_1710.jsonl`.
+- Prije slanja: probni mailovi 9 od 9 u INBOX (desk@worldwinerymap.org), provjere pošiljatelja prolaze, linkovi rade. S Mailjet lista maknute ukupno 22 adrese: 14 (profil, naša lista, već dobili mail) i 8 pod krivim imenom vinarije (nađeno usporedbom s `MAIL_VAN.csv`). Usporedba s 25 starih izvora sa starog laptopa: drugih poklapanja nema.
+- U tekstovima ostaje »90 zemalja« (Matija: »ne mijenjaj zemlje, trajat će predugo«).
+
 ## Izvršeno 9.11. poslije odluka
 
 - **Mailjet runda 2:** maknuto 14 adresa s lista (28 redaka u popisu bilo je 14 različitih adresa; ista adresa visi na više zapisa na karti). Liste sada: IT 1.186, FR 1.234, ES 519, LAT 131, PT 187, CS 62, SK 17, ZA 213, INTL 422, ukupno 3.971. Zapis `out/inventar_0911/mailjet_maknuto_0911.json`. Jedna adresa u Snov nacrtu (info@elingforest.com.au, vinarija već dobila mail na drugu adresu) miče se u provjeri prije paljenja.
