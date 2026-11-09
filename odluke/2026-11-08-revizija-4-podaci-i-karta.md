@@ -69,7 +69,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 4.13 EuroGeographics geometrija na 4 sloja granica (samo nekomercijalno)
 - izvor: t.316; revizija G ODLUČI 6 (P0) · obećano: 2.10. · stanje: **otvoreno** · zadnji spomen: t.316 · odluka: vlasnik + tehničko
 - prijedlog: P0 ČEKA: 4 sloja granica na geometriji dopuštenoj samo nekomercijalno; zamjena izvorom (geoBoundaries) je tehnički posao, odluka je Matijina kad.
-- **Matija:** 
+- **Matija:** 9.11.: zamijeni geoBoundaries. Tehnički posao (4 sloja granica + pečenje), termin kad Claude izmjeri opseg.
 
 ### 4.14 Sottoilnoce dvojnici
 - izvor: t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik

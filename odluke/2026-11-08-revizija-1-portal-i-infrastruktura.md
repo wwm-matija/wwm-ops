@@ -9,27 +9,27 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 1.1 CF Cache Rule za /data/* (karta sporo, JSON DYNAMIC; treba token Zone.Cache Rules.Edit u `/root/.env.cloudflare`)
 - izvor: t.398, t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: vlasnik
 - prijedlog: IDE ODMAH, tehničko: Matija napravi token Zone.Cache Rules.Edit (upiše ga sam u /root/.env.cloudflare), Claude postavi pravilo. Karta je spora bez toga.
-- **Matija:** 
+- **Matija:** 9.11.: ne čeka, radi odmah. Matija pravi pravilo ručno u Cloudflareu (koraci dani u razgovoru 9.11.); Claude poslije mjeri cf-cache-status.
 
 ### 1.2 /admin na api. javno dostupan, zaštita Cloudflare Accessom
 - izvor: t.178; revizija G ODLUČI 1 (P0) · obećano: 14.9., ponovljeno 17.10. · stanje: **nejasno** · zadnji spomen: t.183 (18.9.), revizija 17.10. potvrdila 200 · odluka: vlasnik
 - prijedlog: IDE: zatvoriti Cloudflare Accessom (login mailom), jedan sat posla, nulti rizik za javni dio. P0 od 14.9.
-- **Matija:** 
+- **Matija:** 9.11.: DA, zatvoriti Cloudflare Accessom. Treba ovlast Access na tokenu (uz Roll 12.11.) ili ručno u Zero Trust sučelju.
 
 ### 1.3 RareCloud ključ ima root na Hetzneru, maknuti ili dati vlastiti bez roota
 - izvor: revizija G ODLUČI 2 (P0); t.183 · obećano: 17.10. · stanje: **nejasno** · zadnji spomen: t.183 · odluka: vlasnik
 - prijedlog: IDE: maknuti RareCloud ključ iz authorized_keys na Hetzneru čim Matija potvrdi da nediraj VM ne treba pisati na Hetzner. P0.
-- **Matija:** 
+- **Matija:** 9.11.: DA, makni. IZVRŠENO 9.11. 09:34 UTC: redak root@rc-s-2vcpu-4gb-3b659a maknut iz /root/.ssh/authorized_keys (0 prijava s 85.121.* u 30 dana), kopija kopije/2026-11-09/authorized_keys.prije-rarecloud-093421, naš ključ provjeren novom prijavom.
 
 ### 1.4 Kopije: snapshot Storage Boxa, proba povrata, drugi ključ izvan stroja (t.103), `backup.sh` trap ERR (t.98), `fable_fix` u kopiji (t.176)
 - izvor: revizija G ODLUČI 3 (P0) · obećano: 8.9. do 17.10. · stanje: **otvoreno** · zadnji spomen: t.98, t.103, t.176 bez zatvaranja · odluka: vlasnik + tehničko
 - prijedlog: IDE u popravke: trap ERR u backup.sh, proba povrata jednom mjesečno, drugi ključ Boxa kod Matije offline. P0, bez toga kopije nisu dokazane.
-- **Matija:** 
+- **Matija:** 9.11.: »ne razumijem«; Claude objašnjava jednostavnije pa pita ponovno.
 
 ### 1.5 Izložene tajne: zamjena Resend ključa (6.9.) i WAF tokena (20.9.), tajne iz memorija u .env
 - izvor: revizija G ODLUČI 4 (P0) · obećano: 17.10. · stanje: **nejasno (u kanonu nema)** · zadnji spomen: revizija G · odluka: vlasnik
 - prijedlog: IDE: Matija zamijeni Resend ključ i WAF token u sučeljima i upiše nove u .env na serveru; stare vrijednosti iz razgovora smatrati izloženima.
-- **Matija:** 
+- **Matija:** 9.11.: ovaj tjedan, podsjetnik 12.11. (zakazan). Zamjena Resend ključa i WAF tokena je Matijin posao u sučeljima; novi u .env na serveru.
 
 ### 1.6 Selidba portala sa shared hostinga (Namecheap SAD) na Hetzner
 - izvor: t.302, t.312; revizija G ODLUČI 9 · obećano: 1.10. · stanje: **otvoreno** · zadnji spomen: t.302; dijagnoza sporosti t.398 · odluka: vlasnik

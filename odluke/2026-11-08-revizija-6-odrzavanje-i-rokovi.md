@@ -9,7 +9,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 6.1 **CF tokeni istječu 13. i 15.11.2026.** (rok ostaje, Matija produžuje)
 - izvor: t.400 · obećano: 4.11. · stanje: **otvoreno, rok** · zadnji spomen: t.400 · odluka: vlasnik
 - prijedlog: ROK 13. i 15.11.: Matija produžuje tokene u Cloudflareu (pravilo: rok ostaje). Podsjetnik 12.11.
-- **Matija:** 
+- **Matija:** 9.11.: podsjeti me 12.11. Podsjetnik zakazan za 12.11. 09:00 (scheduled task na laptopu).
 
 ### 6.2 Stara baza atributa v26 bez indeksa (1,5 GB) na Storage Box »za koji dan«
 - izvor: t.399, t.400 · obećano: 4.11. · stanje: **otvoreno** · zadnji spomen: t.400 · odluka: tehničko

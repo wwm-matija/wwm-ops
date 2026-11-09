@@ -9,7 +9,7 @@ Izvor: `Documents/WWM_SUSTAV_RADA_2026-11-04/NEISPUNJENO_kanon.md` (stanje kanon
 ### 5.1 Wine News od 1.12.: računi partnera, obrazac, pin članka, filtar, API (»testiranje početkom 11.«)
 - izvor: revizija G #1 (P0) i ODLUČI 5; t.396 (poziv u mailu) · obećano: 4.10. partnerima · stanje: **nejasno (u kanonu nema točke gradnje)** · zadnji spomen: t.396 · odluka: vlasnik + programer
 - prijedlog: KRITIČNO: obećano partnerima (poziv u mailu, »test početkom 11.«), gradnja nije zapisana. Odluka: tko gradi (programer?) i kad; bez toga obećanje pada.
-- **Matija:** 
+- **Matija:** 9.11.: krećemo graditi u petak 13.11.
 
 ### 5.2 ProWein: dokument-ponuda (7 stavki + Journal + filtar + embed)
 - izvor: t.379, t.384 · obećano: 20.10. · stanje: **otvoreno** · zadnji spomen: t.384 · odluka: vlasnik
