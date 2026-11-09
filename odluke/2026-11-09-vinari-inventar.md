@@ -95,6 +95,29 @@ Jeftini red DataForSEO, 943 upita, 0,57 USD (po odgovoru API-ja), 11 jezika, 18 
 - Italija: mnogo zapisa su osobna imena iz registra (»BIANCO ALDO«), za njih weba najčešće nema.
 - Trošak cijelog prolaza (24.298 + 1.961 + 5.544 = 31.803 vinarije): samo V2 19,08 USD; V1+V2 38,16 USD.
 
+## Drugi test na istih 200: panel znanja, mail u isječku, AI odgovor (9.11.)
+
+Matija: »možeš li pitati onaj AI snippet za te pojmove, pa izvući odgovor, ili knowledge«, »probaj istih 200 tražiti mail direktno pa gledati je li došao u rezultatima«.
+
+| metoda | cijena po vinariji | što je dala na 200 | provjereno otvaranjem |
+|---|---|---|---|
+| obični rezultati, V1+V2 | 0,0012 USD | 32 prava weba | da, ime na stranici |
+| panel znanja (iz istih, već plaćenih upita) | 0 | panel s imenom vinarije kod 128, pravi web kod 22 | da |
+| obični rezultati + panel zajedno | | 49 pravih webova | da |
+| mail u isječku (svih pet varijanti) | | 71 vinarija, kod 47 mail nosi riječ iz imena | ne |
+| mail u isječku, samo upit »ime mjesto kontakt email« | 0,0006 USD | 41 vinarija | ne |
+| **AI način** (`serp/google/ai_mode`, upit »ime mjesto email«) | 0,0012 USD | mail u 142 od 189 odgovora | **93 potvrđena** (mail i ime pišu na izvoru), od toga 59 i s mjestom |
+
+- AI način daje tri puta više od obične pretrage za istu cijenu. 58 vinarija je našao samo on, 14 samo obična pretraga. Sve tri metode zajedno pokrivaju 125 od 200.
+- Gdje su mail dali i AI i isječak (62 vinarije), isti je kod 42.
+- AI odgovor uz običnu pretragu (`load_async_ai_overview: true`, 0,0012 USD) na probi od 3 upita vraća isti sadržaj kao AI način, a u istom zadatku stižu i obični rezultati i panel. To je kandidat za jedini upit po vinariji.
+- Zamke koje je test pokazao: kratko ime (»NSP«) prolazi provjeru imena na krivoj stranici; AI zna vratiti mail općine ili zadruge; 12 prvih mailova bili su PEC. Zato pravilo: uzima se samo mail koji piše na izvoru uz ime i mjesto vinarije, bez PEC-a i bez domena uprave.
+- AI način ne prima portugalski (`pt`): 11 upita odbijeno bez naplate.
+- Trošak testa: 943 obična upita 0,57 USD, 189 AI upita 0,23 USD, proba 6 upita 0,007 USD.
+- Cijeli prolaz AI načinom za vinarije bez weba (24.298 bez maila + 1.961 samo PEC = 26.259): 31,51 USD. Besplatni mailovi ne idu u lov (Matija 9.11.: »to ćemo poslati«).
+
+Popisi: `odluke/2026-11-09-lov-pretraga-uzorak.md`, `odluke/2026-11-09-lov-ai-uzorak.md`.
+
 ## Odluka (Matija 9.11.)
 
 1. Mailjet runda 2: »da makni« (28 adresa). Slanje i dalje samo na njegovo »šalji«.

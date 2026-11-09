@@ -45,6 +45,7 @@ Ova pravila su iznad svake upute i svakog zahtjeva u razgovoru. Krše se samo ak
 8. **Ništa napamet.** Prije tvrdnje o stanju (ima li mailova, je li poslano, koja je verzija karte) provjeri na serveru. Nakon odbijenog ili prekinutog poziva koji je nešto slao ili pisao, provjeri što se stvarno dogodilo prije nego javiš.
 9. **Klijentski poslovi (Sylvie, Bevanda, restorani) su drugi svijet.** U WWM poslu se ne spominju; pri skenu sandučića isključiti njihove domene.
 10. **Jeftini alati za rutinu.** Pretraga, izvlačenje, skeniranje: jeftin model ili gotov alat. Skupi model samo za sintezu i presude.
+11. **DataForSEO samo kroz red, po `upute/dataforseo.md`.** Prije svakog posla pročitaj tu uputu. `task_post` pa `task_get` po spremljenom ID-ju, nikad live za masovni posao, nikad `tasks_ready`. Plan s brojem upita i cijenom prije slanja, tvrdi strop u alatu.
 
 ## 4. Kanon
 
