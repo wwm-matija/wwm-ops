@@ -7,3 +7,4 @@ out/*
 !out/.gitkeep
 !out/OBJAVE_SVE.json
 !out/OBJAVE_SVE.csv
+!out/NE_KONTAKTIRATI.csv

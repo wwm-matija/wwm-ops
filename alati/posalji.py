@@ -251,7 +251,25 @@ def csv_natrag(alias, host):
     print("ledger: %d novih redaka s %s -> %s" % (len(novo), host, LEDGER_CSV))
 
 
+def brava_ne_kontaktirati(a):
+    """Prije svakog slanja: nijedan primatelj (ni cc) ne smije biti na out/NE_KONTAKTIRATI.csv. Bez iznimke."""
+    sys.path.insert(0, OVDJE)
+    import ne_kontaktirati as nk
+    adrese, domene = nk.skupovi()
+    lose = []
+    for e in ucitaj_plan(a.plan, a.host, a.samo):
+        for adr in [e.get("to", "")] + list(e.get("cc") or []):
+            b = nk.blokirana(adr, adrese, domene)
+            if b:
+                lose.append("%s -> %s (%s)" % (e.get("id"), adr, b))
+    if lose:
+        sys.exit("STOP: primatelj je na listi NE KONTAKTIRATI, ništa nije poslano ni provjeravano:\n  " + "\n  ".join(lose)
+                 + "\nMakni te stavke iz plana. Lista se ne zaobilazi.")
+    print("lista ne kontaktirati: %d adresa i %d domena, nijedan primatelj iz plana nije na njoj" % (len(adrese), len(domene)))
+
+
 def lokalno(a):
+    brava_ne_kontaktirati(a)
     alias = HOSTOVI[a.host]
     r = ssh(alias, "mkdir -p %s" % PODACI)
     if r.returncode:
