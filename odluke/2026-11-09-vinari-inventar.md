@@ -69,6 +69,11 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - Nove adrese ne idu u Snov bez provjere: prvo lokalno (MX, web, ime), u Snov verifikaciju samo SIGURNO i na tvoju riječ.
 - Agenti (Opus) samo za presudu gdje skripta nije sigurna. Skripta radi vađenje.
 
-## Odluka
+## Odluka (Matija 9.11.)
 
-- Matija:
+1. Mailjet runda 2: »da makni« (28 adresa). Slanje i dalje samo na njegovo »šalji«.
+2. Snov nacrti K1Z: isti dan kad i Mailjet, »ide drugom infrastrukturom«.
+3. Žute u Mailjet rundu 3: da.
+4. Besplatni mail kao poseban Mailjet paket: da. »PEC nikad, ali PEC mailove treba staviti da se traži novi mail u lovu.«
+5. GR, BR, CY (878): bile su isključene jer nije bilo članka s linkom. »Treba probati njima slati direkt link na profil na karti. Ali u manjim rundama, 150 dnevno. Samo zelene. Uz praćenje spam filtera da nismo na listi nekoj. Paziti jako. I tu testirati koliko bolje ide ako je link.« DACH i ex-YU: nije odlučeno.
+6. Lov: s webom ok, »probaj što jače do kraja kroz web«. Bez weba: prvo test na 50, 100, najmanje 200 pretraga na više jezika, uzorak što daje, treba li dodati riječi po jeziku ili adresu; tek onda cijeli prolaz. Ispale na čišćenju: ok, ali prvo vidjeti imamo li pravi web.
