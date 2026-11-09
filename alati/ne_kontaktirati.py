@@ -115,7 +115,7 @@ def main():
         if a.json:
             for x in json.load(io.open(a.json, encoding="utf-8")):
                 e = x.get("email") if isinstance(x, dict) else x
-                nap = " ".join(str(x.get(k)) for k in ("lista", "medij", "razlog") if isinstance(x, dict) and x.get(k))
+                nap = (x.get("napomena") if isinstance(x, dict) and x.get("napomena") else " ".join(str(x.get(k)) for k in ("lista", "medij") if isinstance(x, dict) and x.get(k)))
                 n += dodaj_red(R, e, "", a.razlog, a.izvor, nap, a.upisao, (x.get("kad") or x.get("upisano") or None) if isinstance(x, dict) else None)
         if a.txt:
             for l in io.open(a.txt, encoding="utf-8"):
