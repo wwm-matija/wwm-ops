@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 319, najnoviji t.404). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:08 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 320, najnoviji t.405). Napravio `alati/kanon_kratki.py` 09.11.2026. 10:33 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.405 · 9.11.2026. · bez objave (Access uzivo 9.11.)
+
+**/admin NA api.worldwinerymap.com IZA CLOUDFLARE ACCESSA (P0 OD 14.9. ZATVOREN, t.178 I REVIZIJA G ODLUCI 1)**
+
+(9.11.2026.; vlasnik: »Da, zatvori (preporuka)«, »Gmail s računa«, »Uključeno«)
+
+Biljezi: `ADMIN-ACCESS-2026-11-09`
+
+Pouke: Ovlast »Access: Apps and Policies« postoji na razini zone i racuna; zonska radi kroz /zones/<zona>/access/apps, racunski put vraca 403. Access se ne moze ukljuciti kroz API, prvi put samo u sucelju.
+
+Otvoreno: Vlasnik da jednom proba prijavu na /admin. Token wwm-pravila i dalje bez roka i s DNS Edit: obrisati ili postaviti rok. Razmotriti i /api/admin/* iza Accessa (obrana ako kljuc procuri) kad se potvrdi da nista izvana ne zove taj put.
 
 ## t.404 · 9.11.2026. · bez objave (CF pravilo uzivo 9.11.)
 
@@ -285,14 +297,4 @@ Otvoreno: 1 obris pending (id 744); CF token rok 28.10.; prijevodi novih kljucev
 Biljezi: `WB-MAIL-OMOT-2026-10-19`
 
 Otvoreno: isporuka u sandučić se i dalje ne mjeri (nema Resend webhooka); novi mail u app.py ne treba nista posebno, omot ga pokriva sam (samo tijelo, bez vlastitog potpisa, ili s `MAIL_POTPIS_IME` ako ga ima); u tijelo maila nikad brojke nase mjere (parcele, hektari).
-
-## t.375 · 16.10.2026. · bez statusa
-
-**REPORT: SVAKI LIST NA JEDNOJ A4 (DVA STUPCA, FIKSNA VISINA), FOTKE U REPORTU, IME VINOGRADA, DEMO »TENUTA VALLEBRUNA«**
-
-(16.10.2026., 08:35 do 11:05 UTC; vlasnik: »PDF export ima 0 bajta«, »report ti ide preko stranica, mora stat na istoj«, »kome mogu dat ovakav demo... ajde slozi jedan pravi odma, kao pravi da je«)
-
-Biljezi: `REPORT-PRINT-2026-10-16`
-
-Otvoreno: demo nije na karti (treba li pin, vlasnik); prijevodi novih kljuceva; fotke CC BY nisu uzete (nema mjesta za navodjenje)
 
