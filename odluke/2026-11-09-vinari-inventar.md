@@ -223,3 +223,25 @@ Upit isti kao u AI načinu (»ime mjesto email«), `load_async_ai_overview: true
 5. GR, BR, CY (878): bile su isključene jer nije bilo članka s linkom. »Treba probati njima slati direkt link na profil na karti. Ali u manjim rundama, 150 dnevno. Samo zelene. Uz praćenje spam filtera da nismo na listi nekoj. Paziti jako. I tu testirati koliko bolje ide ako je link.« DACH i ex-YU: nije odlučeno.
 7. Dopuna 9.11. popodne: Mailjet runda 2 i Snov zelene idu **danas, nakon probnih**; probni mail na naš sandučić koji nije glavna domena. DACH i ex-YU: odgođeno za petak 13.11. GR/BR/CY: link smije ravno na profil na worldwinerymap.com, »ali sporije šaljemo, provjeravaš«. Lov AI načinom za 26.259 bez weba: »može, kreni« (pokrenuto 9.11. 14:54).
 6. Lov (dopuna 9.11.): »nemoj loviti ove s besplatnim mailom, to ćemo poslati. PEC samo i ove što nećemo.« Lov: s webom ok, »probaj što jače do kraja kroz web«. Bez weba: prvo test na 50, 100, najmanje 200 pretraga na više jezika, uzorak što daje, treba li dodati riječi po jeziku ili adresu; tek onda cijeli prolaz. Ispale na čišćenju: ok, ali prvo vidjeti imamo li pravi web.
+
+## Runda 3 vinarija: nacrti spremni (10.11. 11:50 UTC, NIJE poslano)
+
+Liste iz lova (zelene Snov) očišćene `lista_ciscenje.py` (ne kontaktirati, MAIL_VAN, 43.765 već kontaktiranih, PEC, jedna po domeni) i s pregledom imena
+(Opus, 798 redaka: 613 preimenovano, 44 nisu vinarije i ispale su; `out/imena_r3_pregled.json`). Tekstovi runde 2 (`tekstovi/mailjet/`), pošiljatelj PR Voice Global.
+
+| skupina | zelene vlastite (nacrt) | besplatni mail (zaseban nacrt) |
+|---|---|---|
+| IT | 785 (14812574) | 401 (14812578) |
+| FR (FR, BE, LU) | 326 (14812581) | 474 (14812584) |
+| ES | 165 (14812588) | 78 (14812591) |
+| LAT (AR, CL, MX, UY) | 33 (14812594) | 6 (14812597) |
+| PT (PT, BR) | 34 (14812600) | 37 (14812603) |
+| CS | 3 (14812606) | 1 (14812609) |
+| SK | 3 (14812612) | 0 |
+| ZA | 13 (14812615) | 0 |
+| INTL | 472 (14812619) | 71 (14812622) |
+| **ukupno** | **1.834** | **1.068** |
+
+Probni mailovi svih 16 nacrta na desk@worldwinerymap.org 11:42 do 11:45 UTC: 16/16 INBOX, SPF/DKIM/DMARC pass, polja popunjena, bez zaostalih varijabli,
+linkovi na članke. Čeka Matijino »šalji« po skupini (`alati/mailjet_runda.py salji --naslov "WWM IT r3 (PR Voice Global)" --odobrio "..."`).
+Niše: 222 nacrta (1.807 adresa) također spremni u Mailjetu, zaseban »šalji« (vidi odluke/2026-11-09-nise-i-mailjet.md).

@@ -50,8 +50,12 @@ def ime_cisto(ime):
         prije = s
         s = PRAVNI.sub("", s).strip(" ,.-")
         s = re.sub(r"\s*\(\s*\)\s*", " ", s).strip()
+    s = re.sub(r"(?i)[\s,]*spol\.?\s*s\s*r\.?\s*o\.?\s*$", "", s).strip(" ,.-")
     razlog = []
     slova = [c for c in s if c.isalpha()]
+    # pojedine riječi VELIKIM slovima (≥ 4 slova, nije kratica) u inače mješovitom imenu: »Azienda Agricola BALDETTI MARIO« -> »Baldetti Mario«
+    if slova and sum(c.isupper() for c in slova) / len(slova) <= 0.8:
+        s = " ".join((w[:1] + w[1:].lower()) if (len([c for c in w if c.isalpha()]) >= 4 and w.isupper()) else w for w in s.split(" "))
     if slova and sum(c.isupper() for c in slova) / len(slova) > 0.8 and len(slova) > 3:
         rijeci = []
         for i, w in enumerate(s.split(" ")):
