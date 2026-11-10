@@ -66,7 +66,7 @@ def tekst_kljuca(GP, P, SIG, k, hook):
     hp = []
     for par in [x.strip() for x in pitch.split("\n\n") if x.strip()]:
         h = "<br>".join(e(l) for l in par.split("\n"))
-        h = re.sub(r"(https://\S+)", r'<a href="\1" style="color:#1a4a8a">\1</a>', h)
+        h = re.sub(r"(https://[^\s<]+?)([.,;:!?)]*)(?=\s|<|$)", r'<a href="\1" style="color:#1a4a8a">\1</a>\2', h)
         hp.append("<p %s>%s</p>" % (ps, h))
     hp.append('<p style="color:#9a9a9a;font-size:12px">%s</p>' % e(sep))
     hp.append("<p %s><b>%s</b></p>" % (ps, e(naslov)))
@@ -172,7 +172,14 @@ def cmd_mailjet(a):
         if samo and k not in samo:
             continue
         if N.get(v["naslov"], {}).get("id"):
-            print("preskačem, nacrt postoji:", v["naslov"]); n_ok += 1; continue
+            did = N[v["naslov"]]["id"]
+            s, j = MJ.api("GET", "campaigndraft/%s" % did)
+            if s == 200 and MJ.data(j)[0].get("Status") == 0:
+                txt = io.open(os.path.join(O, v["tijelo"]), encoding="utf-8").read()
+                htm = io.open(os.path.join(O, "tekstovi/%s_tijelo.html" % k), encoding="utf-8").read()
+                s2, j2 = MJ.api("POST", "campaigndraft/%s/detailcontent" % did, json={"Html-part": htm, "Text-part": txt})
+                print("nacrt postoji, sadržaj osvježen:", v["naslov"], s2); n_ok += 1; continue
+            print("preskačem, nacrt postoji i nije u stanju 0:", v["naslov"]); n_ok += 1; continue
         R = MJ.citaj_csv(os.path.join(O, v["csv"]))
         kont = [{"Email": r["email"], "Name": r["company_name"][:255], "Properties": {"company_name": r["company_name"], "body2": r["body2"]}} for r in R if r["email"] not in kont_sve]
         lid, n = MJ.lista_id(v["lista"])

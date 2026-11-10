@@ -174,7 +174,7 @@ def html_iz(txt):
     unsub = m.group(0)
     hp = []
     for p in [p.strip() for p in txt.split("\n\n") if p.strip()]:
-        p2 = re.sub(r"(https://\S+)", r'<a href="\1" style="color:#1a4a8a">\1</a>', p)
+        p2 = re.sub(r"(https://[^\s<]+?)([.,;:!?)]*)(?=\s|<|$)", r'<a href="\1" style="color:#1a4a8a">\1</a>\2', p)
         if unsub in p2:
             rijec = p2.split(":")[-1].strip().replace(unsub, "").strip() or "unsubscribe"
             p2 = re.sub(r":\s*[^:]*" + re.escape(unsub) + r"\s*$", ': <a href="%s" style="color:#6B6B6B">%s</a>' % (unsub, rijec), p2)
