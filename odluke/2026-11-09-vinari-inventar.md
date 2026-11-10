@@ -131,6 +131,11 @@ Odluka Matije 10.11.: »ulaze u oboje, da budu za stalno tu za dalje«. Alat `al
 
 Zaliha: »potvrđen bez mjesta« 3.792 (nije dirano), »samo lista« 4.974 (dvojnici i grupe: čeka spajanje zapisa).
 
+**Snov provjera novih adresa s vlastite domene (Matija 10.11. »Da, provjeri«; `alati/snov_provjera.py`, oznaka lov1011):** 3.854 adresa, 93 bez MX zapisa preskočene,
+3.641 predano (120 Snov nije primio ni nakon ponavljanja), krediti 3.869 → 1.112. Rezultat 11:30 UTC: **zelena 2.568** (70 %), catch-all 486, nepoznato 203,
+nevaljana 244, još u obradi 140. Zelene izvan DACH/ex-YU **1.889** (IT 814, FR 336, US 316, ES 174, AU 67, HU 29, AR 22, BR 21), DACH/ex-YU 679 (odluka petak).
+Datoteka `out/snov_provjera_lov1011_rezultat.csv` (laptop). Snovov red prima oko 1.400 adresa odjednom, ostatak čeka (prvi prolaz stao sat vremena).
+
 ## GR, CY, BR: izravni link na profil (nacrti složeni 9.11., NIJE upaljeno)
 
 Matija 9.11.: »sredi snov za ove br gr«, tekst odobren (»Da, složi nacrte«). Paljenje tek na njegovo »šalji«.
