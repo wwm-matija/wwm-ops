@@ -52,5 +52,19 @@ Snov nacrti »B2B K1Z 2910« (1.740 adresa): nijedna na listi.
 Što nije pokriveno: usmene odjave i odjave koje je Matija sam riješio izvan sandučića; pošta starija od kolovoza koju je cron brisao do 21.9.; popis 22+14 iz revizije 17.10. nije uspoređen jer je dokument na starom laptopu (vjerojatno je sadržan u Snov listi).
 Snov i Mailjet se ovime NE mijenjaju; prijenos naše liste u njih je zaseban korak.
 
-## Odluka
-(prepisuje se iz dokumenta)
+## Odluka (Matija 10.11.2026., u razgovoru)
+
+5. Novi krug za neposlane: **da, sa starim tekstom** (»novi tekst, ostavi stari za ovu rundu«).
+6. Žute kroz Mailjet: **da** (»žute može kroz Mailjet«).
+7. Pregled odgovora medija: **kasnije, kroz Codex** (»pregled odg za medije ću kasnije, kroz codex«).
+
+## Izvršeno 10.11.
+
+Alat `alati/nise_mailjet.py` (plan, mailjet, probni; slanje samo kroz `mailjet_runda.py salji --odobrio`). Plan 10.11. 10:13:
+raspored 5.440 adresa, Snov stvarno poslao 3.633 (po `out/snov_poslano_sve_0911.json`), **za novi krug 1.807** (čekale, žute i preskočene zajedno;
+odgovorilih i naše liste ne kontaktirati među njima nema), 222 ključa teksta (zemlja_jezik), po jeziku en 979, es 155, fr 75, it 72, de 66, pt 65, tr 42, nl 41.
+Tekst isti kao u Snovu (pitch + priča), kuka na istu press stranicu na pr-voice.info (221 od 222 postoji, 1 ostaje na izvornoj domeni),
+pošiljatelj contact@prvoiceglobal.com »PR Voice Global«, potpis »Matija Gavrilović, Senior PR Specialist | PR Voice Global, Official PR partner of World Winery Map«.
+Dvije razlike prema Snovu: »WorldWineryMap.com« u priči piše kao »World Winery Map« (Spamhaus 19.9.), podnožje s odjavom na engleskom za sve jezike.
+Rizik: žute adrese (catch-all, nepoznato) nisu provjerene; bounce u Mailjetu će biti veći nego u rundi 2 vinarija (1,3 %).
+Liste i tekstovi: `out/nise_r2/` (laptop). Nacrti u Mailjetu: prvo US_en i probni mail na desk@worldwinerymap.org, pa ostali ključevi.
