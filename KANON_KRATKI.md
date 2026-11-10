@@ -1,8 +1,20 @@
 # KANON KRATKI
 
-Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 322, najnoviji t.407). Napravio `alati/kanon_kratki.py` 09.11.2026. 14:34 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
+Sažetak zadnjih 30 radnih paketa iz `/root/vino_world/SUSTAV_RADA.md` (ukupno paketa: 323, najnoviji t.408). Napravio `alati/kanon_kratki.py` 10.11.2026. 05:22 UTC. Ovo je izvod, ne izvor: kod neslaganja vrijedi veliki kanon.
 
 Čitaj odozgo: najnoviji paket je prvi. Za svaki: što je napravljeno (naslov), pouke, što je ostalo otvoreno.
+
+## t.408 · 10.11.2026. · bez objave
+
+**LOV MAILOVA 9.11. ZAVRSEN I UPISAN: 2.963 NOVIH MAILOVA U LEDGER DOM_ISPRAVAK I ZIVU wwm.db (68.179 -> 71.024 S MAILOM), LISTA ZA SLANJE 5.030; ALATI mail_unos.py I slanje_stanje.py U wwm-ops**
+
+(10.11.2026.; vlasnik: »ulaze u oboje. da budu za stalno tu za dalje«)
+
+Biljezi: `MAIL-UNOS-2026-11-10`
+
+Pouke: (1) Mail+ime+mjesto na izvoru nije dovoljno za bazu kad je ime vinarije osobno ime; izvor mora imati vinski kontekst, a adresa ne smije biti ustanova. (2) Adresa koju vec nosi druga vinarija na karti je najcesce dvojnik iste firme pod registarskim imenom (3.283 slucaja): rjesava se spajanjem zapisa, ne drugim upisom maila. (3) Upis maila = redak u DOM_ISPRAVAK + isti UPDATE, nikad samo UPDATE (gradnja ga brise); mail u bazi je podloga auto-claima. (4) Vlasnik: skripte razvijene usput idu u wwm-ops/alati, ne u scratch.
+
+Otvoreno: Snov provjera 3.854 adresa na vlastitoj domeni prije slanja (krediti 3.869); kako i kada slati 5.030 (Mailjet r3 zute 3.689 i besplatni paket odobreni, liste nisu slozene); 3.792 potvrdjen bez mjesta; dvojnici iz lova (3.283) za WID_SPOJ; GR/CY i BR nacrti; DACH i ex-YU u petak 13.11.
 
 ## t.407 · 9.11.2026. · bez objave
 
@@ -291,14 +303,4 @@ Biljezi: `WG-VINOGRAD-POPUP-2026-10-21`
 **PROWEIN-2027-PREVIEW: privremeni pregled za ponudu Messe Düsseldorf (objava #84, karta v10071, SHV `202610201438`)**
 
 (20.10.2026., zakrpa `we`, nalog vlasnika »za sada samo pregled, bez dopuna i crona, kreni sa svime«)
-
-## t.378 · 20.10.2026. · bez statusa
-
-**PAKET EU: SLUZBENI SLOJEVI PL, VALONIJA, LV, EE, FI, IE; GENERACIJA v25, OBJAVA #83, karta v10070, SHV `202610200954`; RUFFUS PREMAPIRANJE; MODERACIJA 32 TEKSTA**
-
-(20.10.2026.; vlasnik: »koje zemlje EU jos mozemo dodati vinograde? latvija, litva?« pa »cilj samo dodati one zemlje koje nisu PR prosle s vise od 2-3 objave... polj, val, la, es, fi - idemo odmah to.. zaboravi na njem, slovacku... ne preskaci irsku i maltu, nisam ti reko da gledas broj vinarija« pa »nadi jos zemalja po svijetu«)
-
-Biljezi: `WD-V25-EU-2026-10-20`
-
-Otvoreno: volumen 5 G (revizija diskova); 1 novi tekst ceka (id 1899); `eu_1020_privremeno` 3,7 GB na `/`; test_novo 1337 OK, 5 LOSE (JOURNAL_RED dirnut iz druge sesije, P1-28 slike/tekstovi mijenjani tijekom testa, admin brojke); Malta LPIS 2021 portal 403
 
