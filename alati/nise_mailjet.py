@@ -12,8 +12,8 @@ _hook, _grupa), PRESS_POPIS.json (predmet, pitch, naslov, folder), izlaz/<ključ
 potpisi_labele_nise.json. Pošiljatelj contact@prvoiceglobal.com »PR Voice Global«; potpis sig_b s brendom PR Voice Global;
 kuka = ista press stranica na pr-voice.info (provjera 200; ako je nema, ostaje izvorna kuka iz rasporeda).
 Tko ne ide: kome je Snov stvarno poslao (out/snov_poslano_sve_0911.json), tko je odgovorio (ODGOVORI_3010.json, _odgovori_scan_*.json),
-naša lista ne kontaktirati, dvostruke adrese. Isti tekst kao u Snovu, uz dvije razlike: »WorldWineryMap.com« u priči piše kao
-»World Winery Map« (Spamhaus 19.9.: .com ne spominjemo) i podnožje s odjavom na engleskom (Mailjet traži [[UNSUB_LINK_XX]]).
+naša lista ne kontaktirati, dvostruke adrese. Isti tekst kao u Snovu (i »WorldWineryMap.com« kao tekst, Matija 10.11.: crne liste čiste, smije),
+uz podnožje s odjavom na engleskom (Mailjet traži [[UNSUB_LINK_XX]]). LINK na worldwinerymap.com i dalje ne smije (Spamhaus 19.9.).
 """
 import argparse, collections, csv, html, io, json, os, re, sys, time, types
 
@@ -57,8 +57,9 @@ def tekst_kljuca(GP, P, SIG, k, hook):
     sig = [x.replace("{BREND}", BREND) for x in SIG[lang]["sig_b"]]
     pitch = pitch.replace("{NASLOV}", naslov).replace("{HOOK}", hook).replace("{POTPIS}", "\n".join(sig))
     sep = SIG[lang].get("sep", "-" * 87)
-    zamj = lambda s: s.replace("WorldWineryMap.com", "World Winery Map").replace("worldwinerymap.com", "World Winery Map")
-    pitch, naslov, pod, odl = zamj(pitch), zamj(naslov), zamj(pod), [zamj(o) for o in odl]
+    # 10.11. Matija: .com kao tekst (ne link) išao je u 534 niše i val lok. vinarija 27.10. bez posljedica, crne liste čiste; tekst ostaje kakav je u Snovu
+    if "https://worldwinerymap.com" in (pitch + naslov + pod + " ".join(odl)).lower() or "http://worldwinerymap.com" in (pitch + " ".join(odl)).lower():
+        raise SystemExit("LINK na worldwinerymap.com u tekstu %s (Spamhaus 19.9.): tekst ne ide" % k)
     txt = pitch.strip() + "\n\n" + sep + "\n\n" + naslov + "\n\n" + pod + "\n\n" + "\n\n".join(odl) + "\n\n" + PODNOZJE
     e = lambda s: html.escape(s, quote=False)
     rtl = ' dir="rtl" style="text-align:right"' if lang in RTL else ""
@@ -75,7 +76,7 @@ def tekst_kljuca(GP, P, SIG, k, hook):
     hp.append('<p style="font-family:Georgia,serif;font-size:12px;line-height:1.5;color:#6B6B6B">%s</p>' % e(PODNOZJE).replace(
         "unsubscribe [[UNSUB_LINK_EN]]", '<a href="[[UNSUB_LINK_EN]]" style="color:#6B6B6B">unsubscribe</a>'))
     htm = '<html><head><meta charset="utf-8"></head><body%s style="background:#ffffff;padding:16px;max-width:640px">' % rtl + "\n".join(hp) + "</body></html>"
-    for z in ("worldwinerymap.com", "\u2014", "\u2013"):
+    for z in ("https://worldwinerymap.com", "http://worldwinerymap.com", "\u2014", "\u2013"):
         if z in htm.lower():
             raise SystemExit("ZABRANA u tekstu %s: %r" % (k, z))
     return p["predmet"], txt, htm
@@ -189,9 +190,11 @@ def cmd_mailjet(a):
         if not job:
             print("UVOZ NIJE PRIHVAĆEN", k, s, str(j)[:160]); continue
         for cek in range(60):
-            time.sleep(4); s, j = MJ.api("GET", "contactslist/%s/managemanycontacts/%s" % (lid, job)); d = MJ.data(j)[0]
-            if d.get("Status") in ("Completed", "Error"):
+            time.sleep(4); s, j = MJ.api("GET", "contactslist/%s/managemanycontacts/%s" % (lid, job)); dd = MJ.data(j)
+            if dd and dd[0].get("Status") in ("Completed", "Error"):
                 break
+            if not dd and cek % 5 == 4:
+                print("  job %s: Mailjet vraća %s %s, čekam" % (job, s, str(j)[:80]))
         L[v["lista"]] = {"id": lid, "kontakata": len(kont), "kad": time.strftime("%Y-%m-%d %H:%M")}
         pred = io.open(os.path.join(O, "tekstovi/%s_predmet.txt" % k), encoding="utf-8").read().strip()
         txt = io.open(os.path.join(O, v["tijelo"]), encoding="utf-8").read()
