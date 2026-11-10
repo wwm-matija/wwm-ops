@@ -97,6 +97,7 @@ def main():
     ap.add_argument("--ulaz"); ap.add_argument("--izlaz"); ap.add_argument("--cc", default="", help="zarezom odvojene zemlje; prazno = sve")
     ap.add_argument("--filtar", action="append", default=[]); ap.add_argument("--sve-zemlje", action="store_true"); ap.add_argument("--vise-po-domeni", action="store_true")
     ap.add_argument("--bez-kontaktirano", action="store_true"); ap.add_argument("--body2-jezik", default="en"); ap.add_argument("--osvjezi", action="store_true")
+    ap.add_argument("--imena", default="", help="JSON {email: {ime, van, bilo}} iz ručnog ili Opus pregleda imena; van != '' = redak ispada")
     a = ap.parse_args()
     if a.osvjezi:
         osvjezi()
@@ -121,6 +122,7 @@ def main():
     kont = set()
     if not a.bez_kontaktirano and os.path.exists(KONT):
         kont = {l.strip().lower() for l in io.open(KONT, encoding="utf-8") if l.strip() and not l.startswith("#")}
+    imena = json.load(io.open(a.imena, encoding="utf-8")) if a.imena else {}
     izb = collections.Counter(); videno, dom_videno, out = set(), set(), []
     for r in R:
         e = (r.get("email") or r.get("mail") or "").strip().lower()
@@ -145,8 +147,14 @@ def main():
             izb["dvostruka adresa"] += 1; continue
         if not a.vise_po_domeni and not BESPL.match(d) and d in dom_videno:
             izb["druga vinarija na istoj domeni"] += 1; continue
+        pr = imena.get(e)
+        if pr and (pr.get("van") or "").strip():
+            izb["pregled imena: nije vinarija (van)"] += 1; continue
         videno.add(e); dom_videno.add(d)
         ime_c, pregled, zasto = ime_cisto(ime)
+        if pr and (pr.get("ime") or "").strip():
+            ime_c, pregled, zasto = pr["ime"].strip(), False, ""
+            izb["ime iz pregleda"] += 1
         izb["ime za pregled"] += bool(pregled)
         red = {"email": e, "company_name": ime_c, "body2": body2(ime_c, a.body2_jezik), "wwm_id": wid, "cc": cc, "ime_izvorno": ime, "ime_pregled": zasto}
         for k, v in r.items():
