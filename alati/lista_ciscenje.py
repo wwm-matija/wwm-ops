@@ -32,6 +32,47 @@ def citaj(put):
     return list(csv.DictReader(io.StringIO(t), delimiter=delim))
 
 
+PRAVNI = re.compile(r"(?i)(?:^|[\s,.-])(?:s\.?r\.?l\.?s?|s\.?s\.?a?\.?|s\.?n\.?c\.?|s\.?a\.?s\.?|s\.?p\.?a\.?|s\.?c\.?a\.?r\.?l\.?|s\.?c\.?|s\.?l\.?u?\.?|s\.?a\.?u?\.?|s\.?a\.?t\.?|soc(?:\.|ieta'?|ietà)?\s+(?:semplice|agricola|agr\.|coop(?:erativa)?)(?:\s+agricola)?|"
+                    r"soc\.?\s*agr\.?|societa'?\s*agricola\s*semplice|coop\.?(?:erativa)?|scea|scev|earl|gaec|sarl|sas|sca|sci|gfa|lda|ltda|l\.?t\.?d\.?a?\.?|pty\.?\s*ltd\.?|llc|l\.?l\.?c\.?|inc\.?|co\.?|corp\.?|gmbh(?:\s*&\s*co\.?\s*kg)?|"
+                    r"kg|ohg|e\.?u\.?|gbr|ag|kft\.?|bt\.?|zrt\.?|s\.?r\.?o\.?|a\.?s\.?|d\.?o\.?o\.?|d\.?d\.?|eood|ood|sp\.?\s*z\s*o\.?o\.?|srl|srls|sagl|di\s+[A-Za-zÀ-ÿ' ]+\s*&\s*c\.?|&\s*c\.?|e\s+c\.?)(?=[\s,.]|$)")
+MALE = {"di", "de", "del", "della", "dei", "degli", "da", "dal", "dalla", "du", "des", "le", "la", "les", "lo", "l'", "y", "e", "i", "and", "of", "the", "von", "van", "zu", "el", "al", "en", "sur", "et", "a", "au", "aux", "d'", "dell'"}
+VINSKA = re.compile(r"(?i)\b(wine|wines|winery|vineyard|vineyards|cellar|cellars|estate|vino|vini|cantina|cantine|azienda|tenuta|tenute|fattoria|podere|masseria|vigna|vigne|vigneti|vignoble|domaine|ch[aâ]teau|clos|mas|cave|caves|bodega|bodegas|vi[nñ]a|vi[nñ]edo|celler|quinta|adega|weingut|winzer|weinbau|weinhof|vinarija|vinograd|pince|pinc[eé]szet|winnica|vina[řr]stv[ií]|cooperativa|coop|cantina|vignerons?|viticult\w*|vitivinic\w*)\b")
+
+
+def ime_cisto(ime):
+    """Ime za pozdrav: makne pravni oblik, ALL CAPS pretvori u naslovna slova, vrati (ime, treba_pregled, razlog)."""
+    s = re.sub(r"\s+", " ", (ime or "").strip().strip(",;."))
+    s = re.sub(r"(?i)^az\.?\s*agr\.?\s+", "Azienda Agricola ", s)
+    s = re.sub(r"(?i)^soc\.?\s*agr\.?\s+", "Società Agricola ", s)
+    s = re.sub(r"(?i)^(?:az\.?\s*vitivinicola|az\.?\s*vinicola)\s+", "Azienda Vitivinicola ", s)
+    prije = None
+    while prije != s:
+        prije = s
+        s = PRAVNI.sub("", s).strip(" ,.-")
+        s = re.sub(r"\s*\(\s*\)\s*", " ", s).strip()
+    razlog = []
+    slova = [c for c in s if c.isalpha()]
+    if slova and sum(c.isupper() for c in slova) / len(slova) > 0.8 and len(slova) > 3:
+        rijeci = []
+        for i, w in enumerate(s.split(" ")):
+            wl = w.lower()
+            if i and wl in MALE:
+                rijeci.append(wl)
+            elif re.fullmatch(r"[A-Z]{1,3}\.?", w) and i:
+                rijeci.append(w)
+            else:
+                rijeci.append("-".join(p[:1].upper() + p[1:].lower() for p in w.split("-")))
+                rijeci[-1] = "'".join(p[:1].upper() + p[1:] if k else p for k, p in enumerate(rijeci[-1].split("'"))) if "'" in rijeci[-1] else rijeci[-1]
+        s = " ".join(rijeci)
+        if not VINSKA.search(s) and 1 <= len(s.split()) <= 3:
+            razlog.append("velika slova, možda osobno ime")
+    if len(s) > 40 or len(s.split()) > 6:
+        razlog.append("dugo ime")
+    if not s:
+        razlog.append("prazno nakon čišćenja"); s = (ime or "").strip()
+    return s, bool(razlog), "; ".join(razlog)
+
+
 def body2(ime, jezik):
     ime = ime.strip()
     if jezik == "it":
@@ -105,12 +146,15 @@ def main():
         if not a.vise_po_domeni and not BESPL.match(d) and d in dom_videno:
             izb["druga vinarija na istoj domeni"] += 1; continue
         videno.add(e); dom_videno.add(d)
-        red = {"email": e, "company_name": ime, "body2": body2(ime, a.body2_jezik), "wwm_id": wid, "cc": cc}
+        ime_c, pregled, zasto = ime_cisto(ime)
+        izb["ime za pregled"] += bool(pregled)
+        red = {"email": e, "company_name": ime_c, "body2": body2(ime_c, a.body2_jezik), "wwm_id": wid, "cc": cc, "ime_izvorno": ime, "ime_pregled": zasto}
         for k, v in r.items():
             if k and k not in red and k not in ("mail", "ime", "naziv", "wid"):
                 red[k] = v
         out.append(red)
-    polja = ["email", "company_name", "body2", "wwm_id", "cc"] + [k for k in (out[0].keys() if out else []) if k not in ("email", "company_name", "body2", "wwm_id", "cc")]
+    OSN = ["email", "company_name", "body2", "wwm_id", "cc", "ime_izvorno", "ime_pregled"]
+    polja = OSN + [k for k in (out[0].keys() if out else []) if k not in OSN]
     with io.open(a.izlaz, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, polja, extrasaction="ignore"); w.writeheader(); w.writerows(out)
     rep = {"ulaz": a.ulaz, "redaka": len(R), "izlaz": a.izlaz, "ostaje": len(out), "izbaceno": dict(izb), "po_cc": dict(collections.Counter(r["cc"] for r in out).most_common()),
