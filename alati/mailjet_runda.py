@@ -77,6 +77,11 @@ def spremi_stanje(S):
     json.dump(S, io.open(STANJE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 
+def upisi(grupa, kljuc, vr):
+    """Upis jednog ključa uz ponovno čitanje datoteke (dva alata smiju pisati naizmjence, nijedan ne smije pregaziti drugoga)."""
+    S = ucitaj_stanje(); S.setdefault(grupa, {})[kljuc] = vr; spremi_stanje(S)
+
+
 def citaj_csv(put):
     t = io.open(put, encoding="utf-8-sig", newline="").read()
     delim = ";" if t.splitlines()[0].count(";") > t.splitlines()[0].count(",") else ","
@@ -163,7 +168,7 @@ def cmd_lista(a):
             if d.get("Status") in ("Completed", "Error"):
                 print("  job", d["Status"], "count", d.get("Count"), "errors", d.get("ErrorCount")); break
     s, j = api("GET", "contactslist/%s" % lid); print("LISTA", a.ime, "ID", lid, "kontakata", data(j)[0]["SubscriberCount"])
-    S = ucitaj_stanje(); S.setdefault("liste", {})[a.ime] = {"id": lid, "csv": a.csv, "kontakata": len(kontakti), "kad": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}; spremi_stanje(S)
+    upisi("liste", a.ime, {"id": lid, "csv": a.csv, "kontakata": len(kontakti), "kad": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")})
 
 
 def html_iz(txt):
@@ -214,8 +219,7 @@ def cmd_nacrt(a):
     s, j = api("POST", "campaigndraft/%s/detailcontent" % did, json={"Html-part": html, "Text-part": txt}); print("sadržaj", s)
     s, j = api("GET", "campaigndraft/%s" % did); d = data(j)[0]
     print("PROVJERA", {k: d.get(k) for k in ("ID", "Title", "Subject", "SenderName", "SenderEmail", "ContactsListID", "Status", "Locale")})
-    N[a.naslov] = {"id": did, "lista": a.ime, "lista_id": lid, "predmet": predmet, "tijelo": a.tijelo, "kad": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}
-    spremi_stanje(S)
+    upisi("nacrti", a.naslov, {"id": did, "lista": a.ime, "lista_id": lid, "predmet": predmet, "tijelo": a.tijelo, "kad": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")})
     print("GOTOVO nacrt %s | NIŠTA NIJE POSLANO" % a.naslov)
 
 
@@ -223,10 +227,14 @@ def nacrt_po_naslovu(naslov):
     S = ucitaj_stanje(); z = (S.get("nacrti") or {}).get(naslov)
     if z:
         return z["id"], z["lista_id"]
-    s, j = api("GET", "campaigndraft", params={"Limit": 100})
-    for d in data(j):
-        if d.get("Title") == naslov:
-            return d["ID"], d.get("ContactsListID")
+    for off in range(0, 2000, 100):
+        s, j = api("GET", "campaigndraft", params={"Limit": 100, "Offset": off})
+        D = data(j)
+        for d in D:
+            if d.get("Title") == naslov:
+                return d["ID"], d.get("ContactsListID")
+        if len(D) < 100:
+            break
     raise SystemExit("nacrt %r ne postoji" % naslov)
 
 

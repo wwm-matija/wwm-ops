@@ -195,7 +195,7 @@ def cmd_mailjet(a):
                 break
             if not dd and cek % 5 == 4:
                 print("  job %s: Mailjet vraća %s %s, čekam" % (job, s, str(j)[:80]))
-        L[v["lista"]] = {"id": lid, "kontakata": len(kont), "kad": time.strftime("%Y-%m-%d %H:%M")}
+        MJ.upisi("liste", v["lista"], {"id": lid, "kontakata": len(kont), "kad": time.strftime("%Y-%m-%d %H:%M")})
         pred = io.open(os.path.join(O, "tekstovi/%s_predmet.txt" % k), encoding="utf-8").read().strip()
         txt = io.open(os.path.join(O, v["tijelo"]), encoding="utf-8").read()
         htm = io.open(os.path.join(O, "tekstovi/%s_tijelo.html" % k), encoding="utf-8").read()
@@ -205,11 +205,11 @@ def cmd_mailjet(a):
             s, j = MJ.api("POST", "campaigndraft", json={"Locale": "en_US", "Sender": BREND, "SenderName": BREND, "SenderEmail": "contact@prvoiceglobal.com", "ReplyEmail": "contact@prvoiceglobal.com",
                                                         "Subject": pred, "ContactsListID": lid, "Title": v["naslov"], "EditMode": "html2"})
         if s >= 300:
-            print("NACRT NIJE STVOREN", k, s, str(j)[:160]); MJ.spremi_stanje(S); continue
+            print("NACRT NIJE STVOREN", k, s, str(j)[:160]); continue
         did = MJ.data(j)[0]["ID"]
         s2, j2 = MJ.api("POST", "campaigndraft/%s/detailcontent" % did, json={"Html-part": htm, "Text-part": txt})
-        N[v["naslov"]] = {"id": did, "lista": v["lista"], "lista_id": lid, "predmet": pred, "tijelo": v["tijelo"], "kad": time.strftime("%Y-%m-%d %H:%M"), "sadrzaj_http": s2}
-        MJ.spremi_stanje(S); n_ok += 1
+        MJ.upisi("nacrti", v["naslov"], {"id": did, "lista": v["lista"], "lista_id": lid, "predmet": pred, "tijelo": v["tijelo"], "kad": time.strftime("%Y-%m-%d %H:%M"), "sadrzaj_http": s2})
+        n_ok += 1
         print("%-28s lista %s (%d) nacrt %s sadržaj %s" % (k, lid, len(kont), did, s2))
     print("GOTOVO: nacrta spremno %d od %d | NIŠTA NIJE POSLANO" % (n_ok, len(plan["nacrti"]) if not samo else len(samo)))
 
