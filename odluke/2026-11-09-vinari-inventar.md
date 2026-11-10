@@ -105,7 +105,31 @@ Po zemlji: `odluke/2026-11-09-vinari-inventar-po-zemlji.csv` (97 zemalja, današ
 - **Zbroj novih mailova po strogom pravilu: 3.968 + 164 + 5.826 = 9.958 vinarija.** U bazu nije upisano ništa.
 - Popisi: `out/lov/AI_MAILOVI.csv` (laptop), `hetzner:/mnt/HC_Volume_106719381/lov_mailova_2026-11-09/` (web_rezultat_*.jsonl, ai/).
 
-Otvoreno za Matiju: (1) kako novi mailovi ulaze u bazu vinarija (paket kroz lanac objave ili samo lista za slanje); (2) Snov provjera novih adresa na vlastitoj domeni (krediti: 3.869 na računu); (3) »potvrđen bez mjesta« 3.792: uzeti ili ručni pregled uzorka.
+Otvoreno za Matiju: (1) ~~kako novi mailovi ulaze u bazu vinarija~~ odlučeno 10.11.: u oboje (dolje); (2) Snov provjera novih adresa na vlastitoj domeni (krediti: 3.869 na računu); (3) »potvrđen bez mjesta« 3.792: uzeti ili ručni pregled uzorka.
+
+## Upis novih mailova u bazu i lista za slanje (10.11.2026.)
+
+Odluka Matije 10.11.: »ulaze u oboje, da budu za stalno tu za dalje«. Alat `alati/mail_unos.py` (vrti se na Hetzneru), koraci `--kontekst`, `--plan`, `--pisi`. Kanon t.408.
+
+**Pouka prije upisa.** Uzorak »POTVRĐEN + mjesto« iz AI načina nije izdržao pregled okom: vinarije s osobnim imenom (SCHIAVONE ANTONIO, BARONI ALESSANDRO, Asperger) pogađaju bilo koju stranicu s tim imenom u tom mjestu (sveučilište, nekretnine, bolnica, savjetovalište). Zato je dodana provjera izvora: svaki od 9.958 izvora ponovno otvoren (379 s, 40 niti), traži se bar 2 vinske riječi na stranici i da mail piše na njoj; adrese ustanova ispadaju po adresi; domena iz DOM_VAN ispada; domena koju na karti nosi 3+ vinarija (grupa ili imenik) ne ide u bazu; adresa koju već nosi druga vinarija na karti ne ide u bazu (najčešće dvojnik iste firme pod registarskim imenom, to je posao za WID_SPOJ, ne za upis maila).
+
+| presuda | vinarija |
+|---|---|
+| u bazu i na listu | 2.963 (od toga 118 uz postojeći PEC, »pec;novi«) |
+| samo lista: adresu već nosi druga vinarija na karti | 3.283 |
+| samo lista: ista adresa na više vinarija u lovu | 865 |
+| samo lista: domenu nosi 3+ vinarija na karti | 826 |
+| ni baza ni slanje: izvor se ne otvara pri ponovnom otvaranju | 900 |
+| ni baza ni slanje: izvor bez vinskog konteksta | 795 |
+| ni baza ni slanje: mail ne piše na izvoru pri ponovnom otvaranju | 106 |
+| ispada: adresa ustanove | 124 |
+| ispada: PEC/uprava 43, DOM_VAN 8, lista ne kontaktirati 20, MAIL_VAN 15, baza već nosi adresu 9 | 95 |
+
+**Baza (10.11. 05:20 UTC):** 2.963 redaka dopisano u `out/DOM_ISPRAVAK.csv` (ledger, 52 → 3.015 redaka; čitač `dom_ispravak.ucitaj_dom` prolazi; kopija `arhiva/2026-11-10/DOM_ISPRAVAK.csv.prije-mail-unos-202611100520`) i isti UPDATE u živoj `wwm.db` (provjera natrag 0 razlika; kopija zahvaćenih `lov_mailova_2026-11-09/wwm_mail_prije_202611100520.csv`). Vinarija na karti s mailom: 68.179 → 71.024. Ledger je trajna istina, sljedeća gradnja `searchdb.py` ga primjenjuje sama (rani STOP provjeren: svi widovi su u masteru ili trećem ulazu). Mail u bazi je podloga auto-claima, zato u bazu samo nedvosmislene adrese.
+
+**Lista za slanje:** `NOVI_MAILOVI_2026-11-10.csv` (server `lov_mailova_2026-11-09/`, kopija `out/lov/` na laptopu), 9.739 redaka; `za_slanje=da` **5.030** (vlastita domena 3.854, besplatni 1.176), izvan DACH/ex-YU **4.034**; 2.312 adresa već kontaktirano pod drugim zapisom (`slanje_0911/KONTAKTIRANO_ADRESE.txt`, 43.765 adresa). Po zemlji: IT 1.583, FR 980, US 628, DE 442, AT 341, ES 330, CH 167, AU 131, HU 69. Slanje tek na Matijinu riječ (Snov provjera adresa na vlastitoj domeni prije toga).
+
+Zaliha: »potvrđen bez mjesta« 3.792 (nije dirano), »samo lista« 4.974 (dvojnici i grupe: čeka spajanje zapisa).
 
 ## GR, CY, BR: izravni link na profil (nacrti složeni 9.11., NIJE upaljeno)
 
