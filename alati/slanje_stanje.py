@@ -81,10 +81,19 @@ class Snov:
         return self.tok
 
     def get(self, put, **par):
+        return self._zovi("GET", put, params=par)
+
+    def post(self, put, data=None, ponovi=True):
+        """ponovi=False: kod mrežne greške NE ponavlja (POST koji je možda stigao do Snova ne smije se poslati dvaput)."""
+        return self._zovi("POST", put, data=data, ponovi=ponovi)
+
+    def _zovi(self, m, put, ponovi=True, **k):
         for pok in range(4):
             try:
-                r = self.ses.get(self.B + put, headers={"Authorization": "Bearer " + self.token()}, params=par, timeout=90)
+                r = self.ses.request(m, self.B + put, headers={"Authorization": "Bearer " + self.token()}, timeout=90, **k)
             except requests.RequestException:
+                if not ponovi:
+                    return 0, {}
                 time.sleep(10); continue
             time.sleep(1.1)
             if r.status_code == 429:
