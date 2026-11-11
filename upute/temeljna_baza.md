@@ -27,17 +27,18 @@ Nikad dvije Snov petlje u isto vrijeme (`snov-odgovori` i `slanje_stanje.py` ne 
 
 | tablica | što je |
 |---|---|
-| `kampanja` | kampanja u Snovu ili Mailjetu: kanal, naziv, tema, val, jezik, domena pošiljatelja, od, do, broj poruka |
+| `kampanja`, `kampanja_tema` | kampanja u Snovu ili Mailjetu: kanal, naziv, tema (jedna ili dvije), val, jezik, domena pošiljatelja, od, do, broj poruka |
 | `slanje` | jedan red = jedna adresa u jednoj kampanji |
 | `ishod` | što se dogodilo s adresom: registracija, pro, odgovor (Snov), bounce, meki bounce, blokirano, odjava, spam, zabrana, odbijanje, micanje s karte |
 | `kontakt` | svaka adresa koju znamo: vrsta (vinarija, medij, institucija, nepoznato), zemlja, naziv, wwm_id |
 | `baza`, `baza_clan` | popis baza i lista (vinarije, mediji, institucije, rasporedi valova) i koja je adresa u kojoj |
 | `objava` | članci medija o karti (iz `alati/objave.py`) |
 | `izvan_wwm` | kampanje klijenata i stare probe: samo naziv i broj poruka, adrese se ne učitavaju |
-| `v_adresa`, `v_val` | pogledi: sažetak po adresi i po valu |
+| `v_slanje`, `v_adresa`, `v_val` | pogledi: slanje s temom, sažetak po adresi i po valu |
 
-Teme se određuju iz naziva kampanje: `B2B` (vinarije), `PR` (mediji), `WINE_NEWS` (pozivi medijima na suradnju: WWM VINSKI, AGRO, TURIZAM, POSLOVNI),
-`INSTITUCIJE` (WWM regije 17.9.), `TEST`.
+Teme se određuju iz naziva kampanje: `B2B` (vinarije), `PR` (mediji), `WINE_NEWS` (poziv medijima na suradnju), `INSTITUCIJE` (WWM regije 17.9.), `TEST`.
+Kampanja može imati dvije teme (tablica `kampanja_tema`, pogled `v_slanje`): val niša (WWM NISE 30.10. i Mailjet NISE) u istom mailu nosi poziv za Wine News
+i press priču, pa je i `PR` i `WINE_NEWS`. Samo poziv su WWM VINSKI (1.10.) i WWM AGRO, TURIZAM, POSLOVNI (2.10.).
 
 ## Izvori
 

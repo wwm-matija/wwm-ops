@@ -18,8 +18,9 @@ Tablice:
   baza       popis baza i lista (izvor, broj redaka, broj adresa); baza_clan = koja adresa je u kojoj bazi
   objava     članci medija o karti (iz alati/objave.py)
   izvan_wwm  kampanje klijenata i stare probe: samo naziv i broj poruka, adrese se NE učitavaju
-Teme (po nazivu kampanje): B2B (vinarije), PR (mediji), WINE_NEWS (pozivi medijima na suradnju: WWM VINSKI, AGRO, TURIZAM,
-POSLOVNI), INSTITUCIJE (WWM regije 17.9.), TEST.
+Teme (po nazivu kampanje): B2B (vinarije), PR (mediji), WINE_NEWS (poziv medijima na suradnju), INSTITUCIJE (WWM regije 17.9.), TEST.
+Kampanja može imati dvije teme: val niša (WWM NISE 30.10. i Mailjet NISE) nosi u istom mailu poziv za Wine News i press priču,
+pa je i PR i WINE_NEWS (tablica kampanja_tema). Samo poziv: WWM VINSKI 1.10., WWM AGRO / TURIZAM / POSLOVNI 2.10.
 """
 import argparse, collections, csv, datetime, glob, io, json, os, re, sqlite3, sys, time
 
@@ -96,6 +97,14 @@ def tema_snov(ime):
     if u.startswith("WWM "):
         return "PR"
     return "STARO"
+
+
+def teme_snov(ime):
+    """Sve teme kampanje; prva je glavna."""
+    t = tema_snov(ime)
+    if t == "PR" and ime.upper().startswith("WWM NISE"):
+        return ["PR", "WINE_NEWS"]
+    return [t]
 
 
 def val_snov(ime):
@@ -196,6 +205,7 @@ def snov_odgovori(a):
 SHEMA = """
 create table kampanja(kljuc text primary key, kanal text, vanjski_id text, naziv text, tema text, val text, jezik text,
                       domena_posiljatelja text, od text, do text, poruka integer, status text);
+create table kampanja_tema(kampanja text, tema text, primary key(kampanja, tema));
 create table slanje(kampanja text, email text, datum text, primary key(kampanja, email));
 create table ishod(email text, vrsta text, datum text, izvor text, kampanja text, napomena text);
 create table kontakt(email text primary key, domena text, vrsta text, cc text, naziv text, wwm_id text);
@@ -213,13 +223,16 @@ create view v_adresa as
          (select count(*) from slanje s where s.email = k.email) as slanja,
          (select min(datum) from slanje s where s.email = k.email) as prvo,
          (select max(datum) from slanje s where s.email = k.email) as zadnje,
-         (select group_concat(distinct c.tema) from slanje s join kampanja c on c.kljuc = s.kampanja where s.email = k.email) as teme,
+         (select group_concat(distinct s.tema) from v_slanje s where s.email = k.email) as teme,
          (select group_concat(distinct i.vrsta) from ishod i where i.email = k.email) as ishodi
   from kontakt k;
+create view v_slanje as
+  select s.email, s.datum, s.kampanja, t.tema, c.val, c.kanal, c.naziv, c.od, c.do
+  from slanje s join kampanja c on c.kljuc = s.kampanja join kampanja_tema t on t.kampanja = s.kampanja;
 create view v_val as
-  select c.tema, c.val, c.kanal, count(distinct c.kljuc) as kampanja, count(*) as poruka, count(distinct s.email) as adresa,
-         min(c.od) as od, max(c.do) as do
-  from slanje s join kampanja c on c.kljuc = s.kampanja group by c.tema, c.val, c.kanal;
+  select tema, val, kanal, count(distinct kampanja) as kampanja, count(*) as poruka, count(distinct email) as adresa,
+         min(od) as od, max(do) as do
+  from v_slanje group by tema, val, kanal;
 """
 
 
@@ -269,15 +282,16 @@ def gradi(a):
 
     # Snov
     for cid, v in snov_kampanje().items():
-        tema = tema_snov(v["ime"])
+        tt = teme_snov(v["ime"]); tema = tt[0]
         if tema in ("KLIJENT", "STARO"):
             c.execute("insert into izvan_wwm values(?,?,?,?,?,?)", ("snov", v["ime"], "klijent" if tema == "KLIJENT" else "stare probe (7/2026)",
                       len(v["adrese"]), v["od"], v["do"]))
             continue
         kl = "snov:" + cid
-        c.execute("insert into kampanja values(?,?,?,?,?,?,?,?,?,?,?,?)", (kl, "snov", cid, v["ime"], tema, val_snov(v["ime"]), jezik_iz(v["ime"]),
+        c.execute("insert into kampanja values(?,?,?,?,?,?,?,?,?,?,?,?)", (kl, "snov", cid, v["ime"], "+".join(tt), val_snov(v["ime"]), jezik_iz(v["ime"]),
                   domena_iz(v["ime"]), v["od"], v["do"], len(v["adrese"]), v["status"]))
         c.executemany("insert or ignore into slanje values(?,?,?)", [(kl, m, v["od"]) for m in set(v["adrese"]) if MAIL.match(m)])
+        c.executemany("insert into kampanja_tema values(?,?)", [(kl, x) for x in tt])
 
     # Mailjet
     p = IZV + "/mailjet_poruke.json"
@@ -288,8 +302,9 @@ def gradi(a):
             naziv = v.get("naslov") or v.get("predmet") or ""
             if not v["poruke"]:
                 continue
-            tema = "PR" if naziv.upper().startswith("NISE") else "B2B"
+            tt = ["PR", "WINE_NEWS"] if naziv.upper().startswith("NISE") else ["B2B"]; tema = "+".join(tt)
             kl = "mailjet:" + cid; dan = (v.get("pocetak") or "")[:10]
+            c.executemany("insert into kampanja_tema values(?,?)", [(kl, x) for x in tt])
             m = re.match(r"(?:WWM|NISE)\s+(\S+)\s+(r\d)", naziv)
             c.execute("insert into kampanja values(?,?,?,?,?,?,?,?,?,?,?,?)", (kl, "mailjet", cid, naziv, tema, "Mailjet " + (m.group(2) if m else "r?"),
                       (m.group(1) if m else ""), mali(v.get("od")).split("@")[-1], dan, dan, len(v["poruke"]), "sent"))
@@ -358,30 +373,35 @@ def stanje(a):
     print("\nSloženo (UTC):", q("select vrijednost from meta where kljuc='slozeno_utc'")[0][0])
     print("\n== POSLANO PO TEMI")
     print("%-12s %9s %8s %8s %8s  %s" % ("tema", "kampanja", "poruka", "adresa", "domena", "razdoblje"))
-    for r in q("""select c.tema, count(distinct c.kljuc), count(*), count(distinct s.email), count(distinct k.domena), min(c.od), max(c.do)
-                  from slanje s join kampanja c on c.kljuc=s.kampanja join kontakt k on k.email=s.email group by c.tema order by 3 desc"""):
+    for r in q("""select s.tema, count(distinct s.kampanja), count(*), count(distinct s.email), count(distinct k.domena), min(s.od), max(s.do)
+                  from v_slanje s join kontakt k on k.email=s.email group by s.tema order by 3 desc"""):
         print("%-12s %9d %8d %8d %8d  %s do %s" % r)
     print("\n== PO VALU")
     for r in q("select tema, val, kanal, kampanja, poruka, adresa, od, do from v_val order by tema, od"):
         print("%-10s %-18s %-8s %4d kamp %6d por %6d adr  %s do %s" % r)
     print("\n== KOME (vrsta kontakta po temi, jedinstvene adrese)")
-    for r in q("""select c.tema, k.vrsta, count(distinct s.email) from slanje s join kampanja c on c.kljuc=s.kampanja join kontakt k on k.email=s.email
-                  group by c.tema, k.vrsta order by 1, 3 desc"""):
+    for r in q("""select s.tema, k.vrsta, count(distinct s.email) from v_slanje s join kontakt k on k.email=s.email
+                  group by s.tema, k.vrsta order by 1, 3 desc"""):
         print("%-12s %-12s %7d" % r)
     print("\n== ISHODI (jedinstvene adrese kojima je poslano u toj temi)")
-    for r in q("""select c.tema, i.vrsta, count(distinct i.email) from ishod i join slanje s on s.email=i.email join kampanja c on c.kljuc=s.kampanja
-                  group by c.tema, i.vrsta order by 1, 3 desc"""):
+    for r in q("""select s.tema, i.vrsta, count(distinct i.email) from ishod i join v_slanje s on s.email=i.email
+                  group by s.tema, i.vrsta order by 1, 3 desc"""):
         print("%-12s %-18s %7d" % r)
-    r = q("""select count(distinct k.wwm_id) from slanje s join kampanja c on c.kljuc=s.kampanja join kontakt k on k.email=s.email
-             where c.tema='B2B' and k.wwm_id<>''""")[0][0]
-    reg = q("""with prvo as (select k.wwm_id w, min(s.datum) d from slanje s join kampanja c on c.kljuc=s.kampanja join kontakt k on k.email=s.email
-                             where c.tema='B2B' and k.wwm_id<>'' group by k.wwm_id)
+    r = q("""select count(distinct k.wwm_id) from v_slanje s join kontakt k on k.email=s.email
+             where s.tema='B2B' and k.wwm_id<>''""")[0][0]
+    reg = q("""with prvo as (select k.wwm_id w, min(s.datum) d from v_slanje s join kontakt k on k.email=s.email
+                             where s.tema='B2B' and k.wwm_id<>'' group by k.wwm_id)
                select count(distinct i.napomena), count(distinct case when i.datum >= p.d then i.napomena end) from ishod i join prvo p on p.w = i.napomena where i.vrsta='registracija'""")[0]
     print("\nB2B: vinarija kojima je poslano %d; od toga registriranih %s (nakon prvog maila %s)" % (r, reg[0], reg[1]))
     r = q("""select count(distinct o.domena) from objava o where o.domena in
-             (select k.domena from slanje s join kampanja c on c.kljuc=s.kampanja join kontakt k on k.email=s.email where c.tema='PR')""")[0][0]
+             (select k.domena from v_slanje s join kontakt k on k.email=s.email where s.tema='PR')""")[0][0]
     print("PR: objava u popisu %d, na %d domena; od toga domena kojima smo slali PR: %d" % (q("select count(*) from objava")[0][0],
           q("select count(distinct domena) from objava")[0][0], r))
+    print("\n== WINE NEWS: kome je išao poziv")
+    for r in q("select val, kanal, count(distinct kampanja), count(distinct email), min(od), max(do) from v_slanje where tema='WINE_NEWS' group by val, kanal order by 5"):
+        print("%-18s %-8s %4d kamp %6d adr  %s do %s" % r)
+    print("ukupno različitih adresa:", q("select count(distinct email) from v_slanje where tema='WINE_NEWS'")[0][0],
+          "| različitih domena:", q("select count(distinct k.domena) from v_slanje s join kontakt k on k.email=s.email where s.tema='WINE_NEWS'")[0][0])
     print("\n== BAZE I LISTE")
     for r in q("select naziv, vrsta, redaka, adresa, mijenjano, (select count(distinct s.email) from baza_clan b join slanje s on s.email=b.email where b.baza=baza.id) from baza order by id"):
         print("%-52s %-11s %7d red %7d adr  %s  poslano na %6d" % r)
