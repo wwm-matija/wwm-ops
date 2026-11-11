@@ -13,6 +13,11 @@ Skupine:
   PALO_4_10          bila u čišćenju 4.10., salje_se = 0
   PROSLO_NEPOSLANO   bila u čišćenju 4.10., salje_se = 1, a adresa nije kontaktirana
   NIJE_CISCENO       nije bila među kandidatima 4.10.
+
+Stupac `zasto` kaže razlog: za PALO iz datoteke čišćenja; za PROSLO iz plana kruga 1
+(KRUG1_PLAN.csv) i boje u Snovu (kand_boje_2710.json: 1 zelena, 2 žuta); za NIJE_CISCENO
+iz popisa kandidata 4.10. (jedna adresa po domeni, samo obični MX ili Google) i MX zapisa
+domene (out/lov/mx_nije_cisceno_<datum>.json, {domena: "mx1,mx2" | "nema MX" | "NXDOMAIN"}).
 """
 import argparse, collections, csv, datetime, glob, io, json, os, sys
 
@@ -81,6 +86,49 @@ def u_nacrtima(snov_putovi):
     return s
 
 
+BOJE = "C:/Users/world/Documents/WWM_REVIZIJA_2026-10-17/DANAS_1710/skripte_I/kand_boje_2710.json"
+FILTRI = ("mailspamprotection", "ppe-hosted", "pphosted", "barracuda", "hornetsecurity", "mimecast", "spamexperts",
+          "sophos", "trendmicro", "vadesecure")
+
+
+def mx_vrsta(v):
+    if v is None:
+        return ""
+    if v in ("NXDOMAIN", "nema MX", "prazno") or v.startswith("greska"):
+        return "bez MX"
+    if "outlook.com" in v or "microsoft" in v:
+        return "Microsoft 365"
+    if "google" in v:
+        return "Google"
+    if any(f in v for f in FILTRI):
+        return "filtar poste"
+    return "drugi MX"
+
+
+def zasto(sk, x, cc, mail, plan, boje, kdom, mx):
+    if sk == "PALO_4_10":
+        d = []
+        if x.get("adr_razlog"): d.append("adresa: " + x["adr_razlog"])
+        if x.get("ime_razlog"): d.append("ime: " + x["ime_razlog"])
+        if x.get("web_prov") != "POTVRDJENO": d.append("web: " + (x.get("web_razlog") or x.get("web_prov", "")))
+        return "palo 4.10. | " + " | ".join(d)
+    if sk == "PROSLO_NEPOSLANO":
+        if mail not in plan:
+            return "nije u planu kruga 1: za zemlju nije bilo teksta"
+        b = (boje.get(mail) or [None, None])[1]
+        if b == 2:
+            return "u planu kruga 1, u Snovu zuta (slane samo zelene)"
+        if b == 1:
+            return "u planu kruga 1, u Snovu zelena, nije poslano"
+        if cc in ("GR", "CY", "BR"):
+            return "u planu kruga 1, zemlja zaustavljena (GR/CY/BR)"
+        return "u planu kruga 1, bez zapisa boje u Snovu"
+    d = mail.split("@")[-1]
+    if d in kdom:
+        return "nije kandidat 4.10.: ista domena vec kod druge vinarije"
+    return "nije kandidat 4.10.: MX domene nije obican ni Google (danas: %s)" % (mx_vrsta(mx.get(d)) or "nije provjereno")
+
+
 def preporuka(sk, c, r, snov, zapreka):
     if zapreka.startswith("ceka"):
         return "CEKA: " + zapreka[5:]
@@ -128,6 +176,15 @@ def main():
     mv = skup_adresa(os.path.join(OUT, "MAIL_VAN.csv"), "mail_stari", ";")
     snov = snov_stanje(a.snov)
     nacrt = u_nacrtima(a.snov)
+    plan = skup_adresa(os.path.join(a.ciscenje, "KRUG1_PLAN.csv"), "email")
+    boje = {mali(k): v for k, v in json.load(io.open(BOJE, encoding="utf-8")).items()} if os.path.isfile(BOJE) else {}
+    kdom = set()
+    with io.open(os.path.join(a.ciscenje, "B2B_SVIJET_KANDIDATI_2026-10-04.csv"), encoding="utf-8-sig", newline="") as f:
+        for r in csv.DictReader(f):
+            kdom.add(mali(r["email"]).split("@")[-1])
+    mx = {}
+    for p in sorted(glob.glob(os.path.join(OUT, "lov", "mx_nije_cisceno_*.json"))):
+        mx.update(json.load(io.open(p, encoding="utf-8")))
 
     red = []; B = collections.OrderedDict()
     def broji(k, cc):
@@ -142,9 +199,13 @@ def main():
         s = snov.get(mail, "")
         pr = preporuka(sk, x, r, s, zap)
         x = x or {}
+        zs = zasto(sk, x, cc, mail, plan, boje, kdom, mx)
+        if pr.startswith("VRATITI") and sk == "NIJE_CISCENO" and mx_vrsta(mx.get(mail.split("@")[-1])) == "bez MX":
+            pr = "NE: domena bez MX"
+        broji("zasto: " + (zs.split(" | ")[0] if sk == "PALO_4_10" else zs), cc)
         red.append([w, cc, ime, mail, izvor, int(bool(r[5])), int(bool(r[6])), sk, x.get("web_prov", ""),
                     x.get("web_razlog", ""), x.get("ime_razlog", ""), x.get("adr_razlog", ""),
-                    x.get("ime_novo", ""), s, pr])
+                    x.get("ime_novo", ""), s, zs, pr])
         broji("skupina: " + sk, cc); broji("preporuka: " + pr.split(" (")[0], cc)
         if sk == "PALO_4_10":
             raz = []
@@ -160,7 +221,7 @@ def main():
     with io.open(izl, "w", encoding="utf-8-sig", newline="") as f:
         wri = csv.writer(f, delimiter=";")
         wri.writerow(["wwm_id", "cc", "ime", "mail", "izvor", "ime_na_webu", "ime_u_domeni", "skupina", "web_prov",
-                      "web_razlog", "ime_razlog", "adr_razlog", "ime_novo", "snov", "preporuka"])
+                      "web_razlog", "ime_razlog", "adr_razlog", "ime_novo", "snov", "zasto", "preporuka"])
         wri.writerows(red)
     saz = dict(datum=a.datum, ukupno=len(red), ciscenje_datoteka=len(dat), ciscenje_redaka=len(cis),
                brojke={k: dict(ukupno=sum(v.values()), po_zemlji=dict(v.most_common(12))) for k, v in B.items()})
