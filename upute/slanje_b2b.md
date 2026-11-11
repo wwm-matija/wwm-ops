@@ -13,6 +13,7 @@ Alati (svi u `alati/`, svi imaju uputu u zaglavlju):
 | `mailjet_runda.py` | `stanje`, `lista`, `nacrt`, `probni`, `makni`, `salji` | samo `salji` s `--odobrio` |
 | `snov_provjera.py` | Snov provjera adresa (troši kredite) | ne, ali troši kredite: samo na Matijinu riječ |
 | `mail_unos.py` | novi mailovi iz lova u bazu i listu (Hetzner) | ne |
+| `ciscenje_razlozi.py` | zašto neposlana adresa nije otišla (čišćenje 4.10. + lov), s preporukom po adresi | ne |
 | `kanon_red.py` | red u kanon (Hetzner) | ne |
 
 Tekstovi: `tekstovi/mailjet/tijelo_<GRP>.txt` i `predmet_<GRP>.txt` (odobreni 31.10., runda 2). Za novu rundu vrijedi isti tekst

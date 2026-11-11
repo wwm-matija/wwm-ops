@@ -245,3 +245,36 @@ Liste iz lova (zelene Snov) očišćene `lista_ciscenje.py` (ne kontaktirati, MA
 Probni mailovi svih 16 nacrta na desk@worldwinerymap.org 11:42 do 11:45 UTC: 16/16 INBOX, SPF/DKIM/DMARC pass, polja popunjena, bez zaostalih varijabli,
 linkovi na članke. Čeka Matijino »šalji« po skupini (`alati/mailjet_runda.py salji --naslov "WWM IT r3 (PR Voice Global)" --odobrio "..."`).
 Niše: 222 nacrta (1.807 adresa) također spremni u Mailjetu, zaseban »šalji« (vidi odluke/2026-11-09-nise-i-mailjet.md).
+
+## Skupina C: zašto 9.420 adresa nije otišlo (11.11.2026.)
+
+Izvor: 74 datoteke `CISCENJE_<CC>.csv` od 4.10. (stigle sa starog laptopa 11.11., kopija `C:\Users\world\stari_laptop_2026-11-11\Downloads\wwm_b2b_svijet`
+i `hetzner:/mnt/HC_Volume_106719381/sa_starog_laptopa_2026-11-11/`), spojene s popisom lova `c_nas_mail_na_webu.json` (naš mail piše na webu vinarije, 9.–10.11.).
+Alat: `alati/ciscenje_razlozi.py`, izlaz `out/lov/C_RAZLOZI_2026-11-11.csv` (jedan red po adresi, stupac `preporuka`) i `.json`.
+
+| skupina | adresa | što to znači |
+|---|---|---|
+| prošlo čišćenje 4.10., a nije poslano | 4.177 | US 839, FR 637, HU 364, IT 357, ES 280, AU 241. Razlog po adresi nije u datotekama (Snov status ili zemlja bez vala); poznat Snov status ima 1.461 od 9.420. |
+| nije bilo među kandidatima 4.10. | 2.736 | IT 764, US 520, FR 314, AU 299. Samo 11 je s popisa naknadno dodanih vinarija; zašto ostale nisu bile kandidati nije izmjereno. |
+| palo na čišćenju 4.10. | 2.507 | vidi dolje |
+
+Palo na čišćenju 4.10. (2.507): samo ime 1.198 (osobno ime ili registarski naziv, IT 849); web tada nedostupan 670; mail tada nije bio na webu 222;
+ime + web 344; adresa (lažna, tuđa domena) 73.
+
+Preporuka po adresi (zbroj 9.420):
+
+| preporuka | adresa |
+|---|---|
+| vratiti: prošlo čišćenje | 3.860 |
+| vratiti: nije čišćeno, ime na webu | 2.087 |
+| vratiti: nije čišćeno, ime u domeni | 226 |
+| vratiti: web razlog otpao (mail je sad na webu) | 798 |
+| vratiti, ime pregledati (pozdrav) | 1.279 |
+| **za vratiti ukupno** | **8.250** |
+| već čeka u Mailjet nacrtu r3 | 521 |
+| već čeka u Snov nacrtu GR/CY/BR | 311 |
+| ručno (po imenu nije vinarija 82, ime nije potvrđeno 74, adresa 72) | 228 |
+| ne (Snov nevaljana 99, MAIL_VAN 11) | 110 |
+
+Za vratiti po jeziku: INTL 3.873 (US 1.492, AU 637, HU 383, CA 194, PL 165, NZ 129, GB 113), IT 1.931, FR 1.332, ES 552, LAT 236, CS 111, ZA 93, PT 84, SK 38.
+Snov status među njima: neprovjereno 7.711, catch-all 351, nepoznato 183, zelena 5. NIJE poslano, lista nije složena; kanal čeka Matijinu odluku.
