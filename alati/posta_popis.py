@@ -6,6 +6,8 @@ posta_popis.py: popis SVE pošte u WWM/PR sandučićima od zadanog dana, za teme
 RADI NA POSLUŽITELJU (namecheap-portal: Python 3.6; hostarmada: Python 3.9). Samo čita poštu.
 Ne dira stanje posla »mailovi« (vidjeni.json, sken_zadnji.txt). Piše jednu datoteku: ~/wwm_ops_podaci/posta_popis_<host>.json.
 Tekst poruke se NE sprema: samo tko, kome (sandučić), kada, predmet, vrsta i, kod bouncea, adresa koja je odbijena.
+S --tekst piše posebnu datoteku posta_tekst_<host>.json: odgovori i nove poruke S tekstom (iznad i ispod citata), za pregled
+i pisanje odgovora. Ta datoteka je radna, ne ulazi u temeljnu bazu.
 
     scp alati/posta_popis.py alati/sken.py alati/sken_iskljuci.txt namecheap-portal:~/wwm_ops_podaci/
     ssh namecheap-portal 'PYTHONIOENCODING=utf-8 python3 ~/wwm_ops_podaci/posta_popis.py --od 2026-09-15'
@@ -58,6 +60,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--od", default="2026-09-15")
     ap.add_argument("--iskljuci", default=os.path.join(OVDJE, "sken_iskljuci.txt"))
+    ap.add_argument("--tekst", action="store_true", help="uz odgovore i nove poruke spremi i tekst (iznad i ispod citata) u posta_tekst_<host>.json")
     a = ap.parse_args()
     od = calendar.timegm(time.strptime(a.od[:10], "%Y-%m-%d"))
     if not os.path.isdir(ROOT):
@@ -132,10 +135,16 @@ def main():
                             kat = "auto"
                         if (kat == "odgovor" or user.lower() in ("contact", "info", "hello", "support")) and sken.MICANJE.search((above + "\n" + below)[:6000]):
                             mic = 1
-                    rows.append(dict(host=HOST, box=box, kat=kat, od=fa, prema="", kad=kad, predmet=subj[:200], micanje=mic, odbijena=odb,
-                                     irt=1 if (m.get("In-Reply-To") or m.get("References")) else 0))
+                    red = dict(host=HOST, box=box, kat=kat, od=fa, prema="", kad=kad, predmet=subj[:200], micanje=mic, odbijena=odb,
+                               irt=1 if (m.get("In-Reply-To") or m.get("References")) else 0)
+                    if a.tekst and kat in ("odgovor", "ostalo"):
+                        red.update(iznad=above[:5000], ispod=below[:2500], od_ime=(getaddresses([sken.hdr(m, "From")]) or [("", "")])[0][0],
+                                   mid=(m.get("Message-ID") or "").strip(), datoteka=fp.replace(os.path.expanduser("~"), "~"))
+                    rows.append(red)
     os.makedirs(PODACI, exist_ok=True)
-    izlaz = os.path.join(PODACI, "posta_popis_%s.json" % HOST)
+    izlaz = os.path.join(PODACI, ("posta_tekst_%s.json" if a.tekst else "posta_popis_%s.json") % HOST)
+    if a.tekst:
+        rows = [r for r in rows if r["kat"] in ("odgovor", "ostalo", "poslano")]
     with open(izlaz, "w", encoding="utf-8") as f:
         json.dump(dict(host=HOST, od=a.od, slozeno_utc=time.strftime("%Y-%m-%d %H:%M", time.gmtime()), sanducica=kutija, poruke=rows), f, ensure_ascii=False)
     from collections import Counter
