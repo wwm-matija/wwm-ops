@@ -248,33 +248,47 @@ Niše: 222 nacrta (1.807 adresa) također spremni u Mailjetu, zaseban »šalji«
 
 ## Skupina C: zašto 9.420 adresa nije otišlo (11.11.2026.)
 
-Izvor: 74 datoteke `CISCENJE_<CC>.csv` od 4.10. (stigle sa starog laptopa 11.11., kopija `C:\Users\world\stari_laptop_2026-11-11\Downloads\wwm_b2b_svijet`
-i `hetzner:/mnt/HC_Volume_106719381/sa_starog_laptopa_2026-11-11/`), spojene s popisom lova `c_nas_mail_na_webu.json` (naš mail piše na webu vinarije, 9.–10.11.).
-Alat: `alati/ciscenje_razlozi.py`, izlaz `out/lov/C_RAZLOZI_2026-11-11.csv` (jedan red po adresi, stupac `preporuka`) i `.json`.
+Izvori: 74 datoteke `CISCENJE_<CC>.csv` od 4.10., `B2B_SVIJET_KANDIDATI_2026-10-04.csv` i `KRUG1_PLAN.csv` (stigle sa starog laptopa 11.11., kopija
+`C:/Users/world/stari_laptop_2026-11-11/Downloads/wwm_b2b_svijet` i `hetzner:/mnt/HC_Volume_106719381/sa_starog_laptopa_2026-11-11/`), boje iz Snova
+`kand_boje_2710.json`, MX domena uživo 11.11. (`out/lov/mx_nije_cisceno_2026-11-11.json`), popis lova `c_nas_mail_na_webu.json`.
+Alat: `alati/ciscenje_razlozi.py`, izlaz `out/lov/C_RAZLOZI_2026-11-11.csv` (jedan red po adresi, stupci `zasto` i `preporuka`) i `.json`.
 
-| skupina | adresa | što to znači |
+| razlog | adresa | najviše |
 |---|---|---|
-| prošlo čišćenje 4.10., a nije poslano | 4.177 | US 839, FR 637, HU 364, IT 357, ES 280, AU 241. Razlog po adresi nije u datotekama (Snov status ili zemlja bez vala); poznat Snov status ima 1.461 od 9.420. |
-| nije bilo među kandidatima 4.10. | 2.736 | IT 764, US 520, FR 314, AU 299. Samo 11 je s popisa naknadno dodanih vinarija; zašto ostale nisu bile kandidati nije izmjereno. |
-| palo na čišćenju 4.10. | 2.507 | vidi dolje |
+| **A. Prošlo čišćenje 4.10., a nije poslano** | **4.177** | |
+| u planu kruga 1, Snov ju je označio žutom; K1Z je slao samo zelene | 2.389 | US 750, FR 514, IT 295, ES 216, AU 212 |
+| nije bilo teksta na jeziku zemlje, pa nije ni ušla u plan | 1.095 | HU 364, PL 156, NL 93, JP 82, GE 79, TR 54 |
+| u planu, bez zapisa boje u Snovu | 380 | FR 118, US 85, ES 58 |
+| zemlja zaustavljena (GR, CY, BR) | 271 | GR 138, BR 124 |
+| zelena, a nije poslano | 42 | IT 27 |
+| **B. Nije ni ušlo u čišćenje 4.10.** (mail je bio u bazi od 31.8.) | **2.736** | |
+| domena na Microsoft 365; kandidat je 4.10. bio samo obični MX ili Google | 1.401 | IT 305, US 268, AU 235, FR 160 |
+| domena iza filtra pošte (mailspamprotection, Proofpoint, Barracuda, Mimecast) | 554 | IT 227, US 150 |
+| ista domena već je bila kod druge vinarije (jedna adresa po domeni) | 390 | IT 150, US 55 |
+| domena danas nema MX | 311 | FR 85, IT 49, US 41 |
+| drugi MX 69, Google 11 | 80 | |
+| **C. Palo na čišćenju 4.10.** | **2.507** | |
+| ime: osobno ime ili registarski naziv umjesto imena vinarije | 1.198 | IT 849, FR 167 |
+| web tada nije radio | 670 | US 164, IT 120, AU 102 |
+| mail tada nije bio na webu | 222 | FR 86, US 44 |
+| ime + web | 344 | IT 224 |
+| adresa: lažna ili tuđa domena (hotel, restoran, agencija) | 73 | |
 
-Palo na čišćenju 4.10. (2.507): samo ime 1.198 (osobno ime ili registarski naziv, IT 849); web tada nedostupan 670; mail tada nije bio na webu 222;
-ime + web 344; adresa (lažna, tuđa domena) 73.
+Kontrola za B: uzorak 600 kandidata s oznakom MX »ok« danas ima 599 običnih MX, 0 Microsoft 365 i 0 filtara, dakle pravilo 4.10. je te domene izostavilo.
 
 Preporuka po adresi (zbroj 9.420):
 
 | preporuka | adresa |
 |---|---|
 | vratiti: prošlo čišćenje | 3.860 |
-| vratiti: nije čišćeno, ime na webu | 2.087 |
-| vratiti: nije čišćeno, ime u domeni | 226 |
+| vratiti: nije čišćeno, ime na webu | 1.831 |
+| vratiti: nije čišćeno, ime u domeni | 197 |
 | vratiti: web razlog otpao (mail je sad na webu) | 798 |
 | vratiti, ime pregledati (pozdrav) | 1.279 |
-| **za vratiti ukupno** | **8.250** |
+| **za vratiti ukupno** | **7.965** (od toga Microsoft 365 1.192, filtar pošte 440) |
 | već čeka u Mailjet nacrtu r3 | 521 |
 | već čeka u Snov nacrtu GR/CY/BR | 311 |
 | ručno (po imenu nije vinarija 82, ime nije potvrđeno 74, adresa 72) | 228 |
-| ne (Snov nevaljana 99, MAIL_VAN 11) | 110 |
+| ne (domena bez MX 285, Snov nevaljana 99, MAIL_VAN 11) | 395 |
 
-Za vratiti po jeziku: INTL 3.873 (US 1.492, AU 637, HU 383, CA 194, PL 165, NZ 129, GB 113), IT 1.931, FR 1.332, ES 552, LAT 236, CS 111, ZA 93, PT 84, SK 38.
-Snov status među njima: neprovjereno 7.711, catch-all 351, nepoznato 183, zelena 5. NIJE poslano, lista nije složena; kanal čeka Matijinu odluku.
+NIJE poslano, lista nije složena; kanal čeka Matijinu odluku.
