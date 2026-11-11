@@ -20,7 +20,8 @@ py -I alati/temeljna_baza.py adresa info@vinarija.it     sve o jednoj adresi
 py -I alati/temeljna_baza.py adresa @vinarija.it         sve adrese na domeni
 ```
 
-Redoslijed nakon svakog slanja: `slanje_stanje.py` (svježi popis poslanog iz Snova), `mailjet-povuci`, `gradi`.
+Redoslijed nakon svakog slanja: `slanje_stanje.py` (svježi popis poslanog iz Snova), `mailjet-povuci`, `posta_popis.py` na oba poslužitelja, `gradi`.
+Odgovor s druge adrese iste domene pripisuje se adresi kojoj smo pisali. Ishod »možda micanje (ključna riječ)« nije zahtjev dok se poruka ne pročita.
 Nikad dvije Snov petlje u isto vrijeme (`snov-odgovori` i `slanje_stanje.py` ne idu zajedno).
 
 ## Što je unutra
@@ -29,10 +30,12 @@ Nikad dvije Snov petlje u isto vrijeme (`snov-odgovori` i `slanje_stanje.py` ne 
 |---|---|
 | `kampanja`, `kampanja_tema` | kampanja u Snovu ili Mailjetu: kanal, naziv, tema (jedna ili dvije), val, jezik, domena pošiljatelja, od, do, broj poruka |
 | `slanje` | jedan red = jedna adresa u jednoj kampanji |
-| `ishod` | što se dogodilo s adresom: registracija, pro, odgovor (Snov), bounce, meki bounce, blokirano, odjava, spam, zabrana, odbijanje, micanje s karte |
+| `ishod` | što se dogodilo s adresom: registracija, pro, plaćeno Pro, ponuda, odgovor (pošta), odgovor (Snov), auto-odgovor, bounce (pošta), bounce, meki bounce, blokirano, odjava, spam, zabrana, odbijanje, micanje s karte |
 | `kontakt` | svaka adresa koju znamo: vrsta (vinarija, medij, institucija, nepoznato), zemlja, naziv, wwm_id |
 | `baza`, `baza_clan` | popis baza i lista (vinarije, mediji, institucije, rasporedi valova) i koja je adresa u kojoj |
 | `objava` | članci medija o karti (iz `alati/objave.py`) |
+| `nas_odgovor` | pojedinačni mailovi koje smo mi poslali iz sandučića (mapa Sent): sandučić, kome, kada, predmet |
+| `ceka` | adrese u nacrtima koji čekaju Matijinu riječ (Mailjet runda 3, niše, Snov GR/CY/BR) |
 | `izvan_wwm` | kampanje klijenata i stare probe: samo naziv i broj poruka, adrese se ne učitavaju |
 | `v_slanje`, `v_adresa`, `v_val` | pogledi: slanje s temom, sažetak po adresi i po valu |
 
@@ -47,6 +50,8 @@ i press priču, pa je i `PR` i `WINE_NEWS`. Samo poziv su WWM VINSKI (1.10.) i W
 | Snov, poslano po kampanji | `out/snov_poslano_sve_0911.json` + `out/slanje_stanje_*.json` | `alati/slanje_stanje.py` |
 | Snov, tko je odgovorio | `out/temeljna/izvori/snov_odgovori.json` | `snov-odgovori` |
 | Mailjet, poruke i status | `out/temeljna/izvori/mailjet_poruke.json` | `mailjet-povuci` |
+| pošta: odgovori, automatski odgovori, bounce, naši odgovori | `out/temeljna/izvori/posta_popis_<host>.json` | `alati/posta_popis.py` na oba mail poslužitelja (naredbe su u zaglavlju skripte), pa `scp` |
+| ponude i uplate Pro | `out/temeljna/izvori/ponude.csv`, `pretplate.csv` | izvoz iz `wwm.db` bez podataka o kupcu |
 | vinarije, registracije, profili | `out/temeljna/izvori/vinarije.csv`, `claims.csv`, `profiles.csv` | izvoz iz `hetzner:/root/wwm_api/wwm.db` (samo čitanje), `scp` |
 | zabrane, odjave, bounce | `out/NE_KONTAKTIRATI.csv` | `alati/ne_kontaktirati.py`, `alati/lista_ciscenje.py --osvjezi` |
 | objave medija | `out/OBJAVE_SVE.json` | `alati/objave.py` |
@@ -55,5 +60,6 @@ i press priču, pa je i `PR` i `WINE_NEWS`. Samo poziv su WWM VINSKI (1.10.) i W
 ## Što nikad
 
 - Baza ne služi za slanje. Lista za slanje radi se s `alati/lista_ciscenje.py`, a slanje ide samo na Matijinu riječ.
-- Tekst odgovora se ne sprema; sandučići se čitaju samo na Matijinu naredbu.
+- Tekst odgovora se ne sprema u bazu (samo tko, kada, predmet, vrsta).
+- Čitanje i analiza idu uvijek bez pitanja (Matija 11.11.2026.: »smiješ sve osim slanja, ali čitanja i analize sve uvijek bez pitanja«). Pita se samo za slanje.
 - Adrese klijenata (MC, Bevanda, Sylvie, Elite) ne ulaze u ovu bazu.

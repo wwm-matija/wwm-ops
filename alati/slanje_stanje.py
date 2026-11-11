@@ -11,7 +11,7 @@ Zapis: out/slanje_stanje_<datum>.json (ne ide u git).
 Ključevi: MAILJET_API_KEY i MAILJET_SECRET_KEY iz .env.mailjet, SNOV_CLIENT_ID i SNOV_CLIENT_SECRET iz .env.bevanda
 (putanje: WWM_ENV_MAILJET, WWM_ENV_SNOV ili zadano C:/Users/world/wwm/). Ključevi se nikad ne ispisuju.
 Snov: pauza 1,1 s po pozivu, 429 = čekanje 310 s; nikad dvije Snov petlje paralelno.
-Odgovori koje Snov broji nisu mjerodavni (promaši većinu); pravi pregled odgovora je čitanje sandučića na riječ vlasnika.
+Odgovori koje Snov broji nisu mjerodavni (promaši većinu); pravi pregled odgovora je čitanje sandučića (alati/posta_popis.py, alati/sken.py), bez pitanja.
 """
 import argparse, datetime, io, json, os, sys, time
 import requests

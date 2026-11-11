@@ -17,6 +17,12 @@ Tablice:
   kontakt    svaka adresa koju znamo: vrsta (vinarija / medij / institucija / nepoznato), zemlja, naziv, wwm_id
   baza       popis baza i lista (izvor, broj redaka, broj adresa); baza_clan = koja adresa je u kojoj bazi
   objava     članci medija o karti (iz alati/objave.py)
+  nas_odgovor  pojedinačni mailovi koje smo MI poslali iz sandučića (mapa Sent): sandučić, kome, kada, predmet
+  ceka       adrese u nacrtima koji čekaju Matijinu riječ (Mailjet runda 3, niše, Snov GR/CY/BR)
+Pošta (odgovori, automatski odgovori, bounce) dolazi iz alati/posta_popis.py, koji radi na mail poslužiteljima i ne sprema tekst.
+Odgovor s druge adrese iste domene pripisuje se adresi kojoj smo pisali (izvor kaže »po domeni«); besplatne domene se ne pripisuju.
+Ishod »možda micanje (ključna riječ)« NIJE zahtjev za micanje dok se poruka ne pročita: 11.11. je svih 6 provjerenih bilo lažno
+(pitanja kako se prijaviti, cijena, pravne napomene u potpisu). Pravi zahtjevi idu kroz alati/sken.py i NE_KONTAKTIRATI.
   izvan_wwm  kampanje klijenata i stare probe: samo naziv i broj poruka, adrese se NE učitavaju
 Teme (po nazivu kampanje): B2B (vinarije), PR (mediji), WINE_NEWS (poziv medijima na suradnju), INSTITUCIJE (WWM regije 17.9.), TEST.
 Kampanja može imati dvije teme: val niša (WWM NISE 30.10. i Mailjet NISE) nosi u istom mailu poziv za Wine News i press priču,
@@ -37,6 +43,9 @@ KLIJENT = re.compile(r"(?i)^(mc |bevanda|hr test bevanda|strano bevanda|sylvie|e
 STARO = re.compile(r"^(bra|Rumunjska|FIN|cz|Albania|FRA|den|esT|arme)\b")
 WN = ("WWM VINSKI", "WWM TURIZAM", "WWM AGRO", "WWM POSLOVNI")
 RANG = {"vinarija": 3, "institucija": 2, "medij": 1, "nepoznato": 0}
+BESPL = re.compile(r"^(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|icloud|aol|msn|libero|virgilio|alice|tiscali|tin|fastwebnet|inwind|"
+                   r"email|orange|wanadoo|free|laposte|sfr|gmx|web|t-online|seznam|centrum|sapo|terra|uol|me|mac|mail|protonmail|proton|"
+                   r"yandex|bluewin|comcast|att|bigpond|btinternet|interia|wp|onet|o2|abv|163|qq)\.", re.I)
 
 # naziv, vrsta kontakta (ili "tabla" = čitaj iz stupca tabla), put, stupci s mailom, stupac zemlje, stupac naziva, stupac wwm_id
 BAZE = [
@@ -213,6 +222,10 @@ create table baza(id integer primary key, naziv text, vrsta text, put text, reda
 create table baza_clan(baza integer, email text, primary key(baza, email));
 create table objava(domena text, cc text, medij text, naslov text, url text, datum text, vrsta text);
 create table izvan_wwm(kanal text, naziv text, razlog text, poruka integer, od text, do text);
+create table nas_odgovor(host text, sanducic text, prema text, datum text, predmet text, u_nit integer);
+create table ceka(kanal text, naziv text, tema text, email text);
+create index i_ceka_email on ceka(email);
+create index i_nas_prema on nas_odgovor(prema);
 create table meta(kljuc text primary key, vrijednost text);
 create index i_slanje_email on slanje(email);
 create index i_ishod_email on ishod(email);
@@ -347,6 +360,64 @@ def gradi(a):
                 if MAIL.match(x.get("email") or ""):
                     c.execute("insert into ishod values(?,?,?,?,?,?)", (x["email"], "odgovor (Snov)", (x.get("datum") or "")[:10], "Snov get-emails-replies",
                               "snov:" + cid, ""))
+    # pošta: odgovori, automatski odgovori, bounce, naši pojedinačni odgovori
+    poslano_na = set(r[0] for r in c.execute("select distinct email from slanje"))
+    po_dom = collections.defaultdict(list)
+    for m in sorted(poslano_na):
+        po_dom[m.split("@")[-1]].append(m)
+    vr = {"odgovor": "odgovor", "auto": "auto-odgovor", "ostalo": "poruka (nije u nit)"}
+    for p in sorted(glob.glob(IZV + "/posta_popis_*.json")):
+        d = json.load(io.open(p, encoding="utf-8"))
+        for r in d["poruke"]:
+            dan = (r.get("kad") or "")[:10]; izv = "pošta %s" % r["box"]
+            if r["kat"] == "poslano":
+                c.execute("insert into nas_odgovor values(?,?,?,?,?,?)", (r["host"], r["box"], mali(r["prema"]), dan, r["predmet"], r.get("irt") or 0))
+            elif r["kat"] == "bounce":
+                if MAIL.match(r.get("odbijena") or ""):
+                    c.execute("insert into ishod values(?,?,?,?,?,?)", (r["odbijena"], "bounce (pošta)", dan, izv, None, ""))
+            elif r["kat"] in vr:
+                m = mali(r["od"])
+                if not MAIL.match(m):
+                    continue
+                cilj = m; dom = m.split("@")[-1]
+                if m not in poslano_na and not BESPL.match(dom) and po_dom.get(dom):
+                    cilj = po_dom[dom][0]; izv += " (po domeni, pisao %s)" % m
+                c.execute("insert into ishod values(?,?,?,?,?,?)", (cilj, vr[r["kat"]], dan, izv, None, r["predmet"]))
+                if r.get("micanje"):
+                    c.execute("insert into ishod values(?,?,?,?,?,?)", (cilj, "možda micanje (ključna riječ)", dan, izv, None, r["predmet"]))
+    # ponude i uplate (bez podataka o kupcu)
+    w_mail = collections.defaultdict(list)
+    for m, x in kont.items():
+        if x[3]:
+            w_mail[x[3]].append(m)
+    p = IZV + "/ponude.csv"
+    if os.path.isfile(p):
+        for r in citaj_csv(p):
+            dan = datetime.datetime.utcfromtimestamp(int(r["created"])).strftime("%Y-%m-%d") if (r["created"] or "").isdigit() else (r["created"] or "")[:10]
+            for m in (adrese(r.get("racun")) or w_mail.get(r["wwm_id"], [])[:1]):
+                c.execute("insert into ishod values(?,?,?,?,?,?)", (m, "ponuda Pro" if r["status"] != "paid" else "plaćeno Pro (ponuda)", dan,
+                          "wwm.db ponude", None, "%s %s %s, %s" % (r["broj"], r["proizvod"], r["status"], r["wwm_id"])))
+    p = IZV + "/pretplate.csv"
+    if os.path.isfile(p):
+        for r in citaj_csv(p):
+            for m in adrese(r.get("email")):
+                c.execute("insert into ishod values(?,?,?,?,?,?)", (m, "plaćeno Pro (%s)" % (r["provider"] or "pretplata"), (r.get("pocetak") or "")[:10],
+                          "wwm.db pretplate", None, "%s %s, %s" % (r["tier"], r["status"], r["wwm_id"])))
+    # nacrti koji čekaju
+    for p in sorted(glob.glob(OUT + "/lista_*_r3*.csv")):
+        if "proba" in p:
+            continue
+        naz = "WWM " + os.path.basename(p)[6:-4].replace("_r3", " r3").replace("_besplatni", " besplatni")
+        c.executemany("insert into ceka values(?,?,?,?)", [("mailjet", naz, "B2B", m) for r in citaj_csv(p) for m in adrese(r.get("email"))])
+    for p in sorted(glob.glob(OUT + "/nise_r2/liste/*.csv")):
+        naz = "NISE %s r2" % os.path.basename(p)[:-4]
+        c.executemany("insert into ceka values(?,?,?,?)", [("mailjet", naz, "PR+WINE_NEWS", m) for r in citaj_csv(p) for m in adrese(r.get("email"))])
+    p = "C:/Users/world/Documents/WWM_REVIZIJA_2026-10-17/DANAS_1710/skripte_I/verifikacija_grbrcy_rezultat_0911.json"
+    if os.path.isfile(p):
+        for m, v in (json.load(io.open(p, encoding="utf-8")).get("rezultat") or {}).items():
+            if isinstance(v, dict) and v.get("smtp") == "valid" and not v.get("catchall") and v.get("cc") in ("GR", "CY", "BR") and MAIL.match(mali(m)):
+                c.execute("insert into ceka values(?,?,?,?)", ("snov", "B2B nacrt %s" % ("GR/CY" if v["cc"] != "BR" else "BR"), "B2B", mali(m)))
+
     p = OUT + "/OBJAVE_SVE.json"
     if os.path.isfile(p):
         for o in json.load(io.open(p, encoding="utf-8")):
@@ -402,6 +473,23 @@ def stanje(a):
         print("%-18s %-8s %4d kamp %6d adr  %s do %s" % r)
     print("ukupno različitih adresa:", q("select count(distinct email) from v_slanje where tema='WINE_NEWS'")[0][0],
           "| različitih domena:", q("select count(distinct k.domena) from v_slanje s join kontakt k on k.email=s.email where s.tema='WINE_NEWS'")[0][0])
+    print("\n== ODGOVORI IZ POŠTE PO TEMI (adrese kojima smo pisali)")
+    for r in q("""select s.tema, i.vrsta, count(distinct i.email), count(*) from ishod i join (select distinct email, tema from v_slanje) s on s.email=i.email
+                  where i.izvor like 'pošta%' group by s.tema, i.vrsta order by 1, 3 desc"""):
+        print("%-12s %-20s %6d adresa %6d poruka" % r)
+    r = q("select count(*), count(distinct email) from ishod where izvor like 'pošta%' and vrsta in ('odgovor','poruka (nije u nit)') and email not in (select email from slanje)")[0]
+    print("pošta od adresa kojima nismo pisali (ni po domeni): %d poruka, %d adresa" % r)
+    r = q("select count(*), count(distinct prema), sum(prema in (select email from slanje)) from nas_odgovor")[0]
+    print("naši pojedinačni mailovi iz sandučića: %d poruka na %d adresa (od toga na adrese iz kampanja: %s)" % r)
+    print("\n== ODGOVORI BEZ NAŠEG ODGOVORA (u mapama Sent nema maila prema toj adresi ni domeni)")
+    for r in q("""select s.tema, count(distinct i.email) from ishod i join (select distinct email, tema from v_slanje) s on s.email=i.email
+                  where i.vrsta='odgovor' and i.izvor like 'pošta%'
+                    and substr(i.email, instr(i.email,'@')+1) not in (select substr(prema, instr(prema,'@')+1) from nas_odgovor)
+                  group by 1 order by 2 desc"""):
+        print("%-12s %6d adresa" % r)
+    print("\n== ČEKA U NACRTIMA (nije poslano)")
+    for r in q("select kanal, tema, count(distinct naziv), count(distinct email), sum(email in (select email from slanje)) from ceka group by 1, 2"):
+        print("%-8s %-14s %4d nacrta %6d adresa (već dobilo neki mail: %s)" % r)
     print("\n== BAZE I LISTE")
     for r in q("select naziv, vrsta, redaka, adresa, mijenjano, (select count(distinct s.email) from baza_clan b join slanje s on s.email=b.email where b.baza=baza.id) from baza order by id"):
         print("%-52s %-11s %7d red %7d adr  %s  poslano na %6d" % r)
@@ -423,6 +511,10 @@ def adresa(a):
             print("   poslano %s  %-9s %-7s %s" % r)
         for r in c.execute("select datum, vrsta, izvor, napomena from ishod where email=? order by 1", (k[0],)):
             print("   ishod   %s  %-14s %s %s" % r)
+        for r in c.execute("select datum, sanducic, predmet from nas_odgovor where prema=? order by 1", (k[0],)):
+            print("   mi smo pisali %s  iz %s  %s" % r)
+        for r in c.execute("select kanal, naziv from ceka where email=?", (k[0],)):
+            print("   čeka u nacrtu: %s %s" % r)
 
 
 def main():
