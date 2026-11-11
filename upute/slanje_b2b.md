@@ -14,6 +14,7 @@ Alati (svi u `alati/`, svi imaju uputu u zaglavlju):
 | `snov_provjera.py` | Snov provjera adresa (troši kredite) | ne, ali troši kredite: samo na Matijinu riječ |
 | `mail_unos.py` | novi mailovi iz lova u bazu i listu (Hetzner) | ne |
 | `ciscenje_razlozi.py` | zašto neposlana adresa nije otišla (čišćenje 4.10. + lov), s preporukom po adresi | ne |
+| `temeljna_baza.py` | jedna baza svega poslanog i ishoda (vidi `upute/temeljna_baza.md`) | ne |
 | `kanon_red.py` | red u kanon (Hetzner) | ne |
 
 Tekstovi: `tekstovi/mailjet/tijelo_<GRP>.txt` i `predmet_<GRP>.txt` (odobreni 31.10., runda 2). Za novu rundu vrijedi isti tekst
